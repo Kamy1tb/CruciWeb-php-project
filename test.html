@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grille Interactive de Mots Croisés</title>
+    <style>
+        .grille {
+            display: grid;
+            grid-template-columns: repeat(5, 50px); /* 5 colonnes */
+            grid-template-rows: repeat(5, 50px);  /* 5 lignes */
+            gap: 2px;
+        }
+        .case {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #ccc;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 50px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .noire {
+            background-color: black;
+        }
+        .case input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            text-align: center;
+            font-size: 18px;
+            background: none;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Grille Interactive de Mots Croisés</h1>
+    <label>
+        Direction d'écriture :
+        <select id="direction">
+            <option value="horizontal">Horizontal</option>
+            <option value="vertical">Vertical</option>
+        </select>
+    </label>
+    <div id="grille" class="grille"></div>
+
+    <script>
+        const rows = 5, cols = 5; // Dimensions de la grille
+        const blackCells = ["A5", "B5", "C2", "D3", "E1"]; // Cases noires
+        let currentDirection = "horizontal"; // Direction par défaut
+
+        // Fonction pour générer la grille
+        function generateGrid() {
+            const grille = document.getElementById('grille');
+            grille.innerHTML = ""; // Réinitialiser la grille
+
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    const cell = document.createElement('div');
+                    const cellId = String.fromCharCode(65 + row) + (col + 1); // Ex : A1, B3
+
+                    if (blackCells.includes(cellId)) {
+                        cell.classList.add('case', 'noire');
+                    } else {
+                        cell.classList.add('case');
+                        const input = document.createElement('input');
+                        input.setAttribute('maxlength', '1'); // Une seule lettre
+
+                        input.addEventListener('input', (e) => {
+                            input.value = e.target.value.toUpperCase(); // Convertir en majuscules
+                            moveToNextCell(row, col);
+                        });
+
+                        cell.appendChild(input);
+                    }
+
+                    grille.appendChild(cell);
+                }
+            }
+        }
+
+        // Fonction pour avancer automatiquement à la case suivante
+        function moveToNextCell(row, col) {
+            const grille = document.getElementById('grille');
+            const cells = Array.from(grille.querySelectorAll('.case:not(.noire) input')); // Toutes les cases normales
+
+            // Trouver la position actuelle dans la liste
+            const currentIndex = cells.findIndex(cell => cell.parentElement.style.gridRowStart == row + 1 && cell.parentElement.style.gridColumnStart == col + 1);
+
+            let nextRow = row, nextCol = col;
+
+            if (currentDirection === "horizontal") {
+                nextCol++;
+                if (nextCol >= cols) {
+                    nextCol = 0; // Revenir à la première colonne
+                    nextRow++;
+                }
+            } else if (currentDirection === "vertical") {
+                nextRow++;
+                if (nextRow >= rows) {
+                    nextRow = 0; // Revenir à la première ligne
+                    nextCol++;
+                }
+            }
+
+            // Calculer l'index de la prochaine cellule
+            const nextIndex = cells.findIndex(cell => cell.parentElement.style.gridRowStart == nextRow + 1 && cell.parentElement.style.gridColumnStart == nextCol + 1);
+            if (nextIndex !== -1) {
+                cells[nextIndex].focus();
+            }
+        }
+
+        // Changer la direction d'écriture
+        document.getElementById('direction').addEventListener('change', (e) => {
+            currentDirection = e.target.value;
+        });
+
+        // Générer la grille au chargement
+        generateGrid();
+    </script>
+</body>
+</html>

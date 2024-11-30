@@ -1,0 +1,8 @@
+# Bloque l'accès direct aux dossiers principaux
+Options -Indexes
+
+# Force l'utilisateur à rester dans le dossier public
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.html [L,QSA]
