@@ -1,0 +1,82 @@
+body {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 800;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+.games-container {
+  padding: 20px;
+  text-align: center;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.game-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: left;
+}
+
+.game-card h2 {
+  margin-top: 0;
+}
+
+.game-card .creator {
+  margin: 0;
+}
+
+.game-card .difficulty {
+  display: flex;
+  align-items: center;
+  color: #666;
+}
+
+.difficulty-circle {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.facile {
+  background-color: green;
+}
+
+.moyen {
+  background-color: orange;
+}
+
+.difficile {
+  background-color: red;
+}
+
+.game-card .description {
+  color: #666;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.game-card button {
+  width: 100%;
+  padding: 10px;
+  background-color: #ff595a;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.game-card button:hover {
+  background-color: #e04e4f;
+}

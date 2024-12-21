@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 // Autoloader pour charger les classes
 spl_autoload_register(function ($class) {
     $path = '../app/';
@@ -18,33 +16,53 @@ spl_autoload_register(function ($class) {
     }
 });
 
-// Initialisation de la base de données
-$database = new Database();
+$routes = [
+    'login' => function () {
+        $controller = new UserController();
+        $controller->login();
+    },
+    'register' => function () {
+        $controller = new AuthController($pdo);
+        $controller->register();
+    },
+];
 
-// Création de l'objet UserModel
-$userModel = new UserModel($database);
+session_start();
+$action = $_GET['action'] ?? '';
 
-// Vérifier l'action et gérer les connexions
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['action']) && $_POST['action'] === 'login') {
-        // Traitement de la connexion
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $user = $userModel->authenticate($username, $password);
 
-        if ($user) {
-            $_SESSION['user'] = $user['username'];
-            header('Location: dashboard.php');
-            exit();
-        } else {
-            echo "Nom d'utilisateur ou mot de passe incorrect.";
-        }
-    } elseif (isset($_POST['action']) && $_POST['action'] === 'register') {
-        // Traitement de l'inscription
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $message = $userModel->createUser($username, $password);
-        echo $message;
+/*if(isset($_POST['logout'])){
+    session_destroy(); 
+    $home = new UserController();
+    $home->index();
+}*/
+
+
+
+if($action == 'login'){
+    $controller = new UserController();
+    if (isset($_POST['username'])) {
+        
+        $controller->login();
+    } else {
+        $controller->afficher_login();
     }
 }
+elseif($action == 'signup'){
+    $controller = new UserController();
+    if (isset($_POST['username'])) {
+        $controller->signUp();
+    } else {
+        $controller->afficher_signup();
+    }
+}
+
+
+else{
+    session_destroy();
+    $home = new LandingController();
+    $home->index();
+     
+}
+
 ?>

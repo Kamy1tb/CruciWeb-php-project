@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+
+.dmsans {
+  font-family: "DM Sans", sans-serif;
+}
+
+/* Add styles for the navigation bar */
+nav {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 60px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+nav .nav-left {
+  display: flex;
+  align-items: center;
+  flex-grow: 2; /* Increase the flex-grow value to push the center section to the right */
+}
+
+nav .logo {
+  width: 50px;
+}
+
+nav .nav-center {
+  flex-grow: 1; /* Center section with less flex-grow value */
+  display: flex;
+  justify-content: center;
+}
+
+nav .nav-links {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+nav .nav-links li {
+  display: inline;
+}
+
+nav .nav-links li a {
+  color: #000;
+  text-decoration: none;
+  font-weight: 300;
+  font-size: larger;
+  padding: 10px 20px;
+  border: none;
+  background: none;
+}
+
+nav .nav-links li a:hover {
+  color: #ff595a;
+}
+
+nav .nav-right {
+  display: flex;
+  align-items: center;
+}
+
+nav .login-button {
+  color: #fff;
+  background-color: #ff595a;
+  text-decoration: none;
+  font-weight: 300;
+  font-size: larger;
+  padding: 10px 30px;
+  border-radius: 12px;
+}
+
+nav .login-button:hover {
+  background-color: #c03e3f;
+}

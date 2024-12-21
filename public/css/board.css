@@ -1,0 +1,140 @@
+body {
+  font-family: "DM Sans", sans-serif;
+  background-color: #f0f0f0;
+  min-height: 100vh; /* Minimum height of 100vh */
+  margin: 0;
+}
+
+.board-container {
+  background-color: #fff;
+  margin: auto;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%; /* At least half the screen */
+  max-width: 1200px; /* Optional: limit the maximum width */
+  text-align: center;
+  margin-top: 20px;
+}
+
+.board-container h1 {
+  letter-spacing: -2px;
+  margin-bottom: 10px;
+  color: #ff595a;
+  font-weight: 800;
+  font-size: 2.8rem;
+}
+
+#app {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#grid-container {
+  display: grid;
+  grid-template-columns: repeat(11, 30px); /* Adjust for column headers */
+  grid-template-rows: repeat(11, 30px); /* Adjust for row headers */
+  margin-bottom: 20px;
+}
+
+#grid-container div {
+  width: 30px;
+  height: 30px;
+  border: 1px solid black; /* Border color */
+  text-align: center;
+  line-height: 30px;
+  font-size: 18px;
+  font-weight: 300; /* Thinner font weight */
+  box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+}
+
+#grid-container .header-cell {
+  background-color: #ff595a; /* Header cell background color */
+  color: #fff; /* Header cell text color */
+}
+
+#grid-container .dark-cell {
+  background-color: #ff595a; /* Dark cell background color */
+  color: #fff; /* Dark cell text color */
+}
+
+#grid-container .highlighted {
+  background-color: #ff8a8a; /* Lighter shade of ff595a for highlighting */
+}
+
+#controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+#controls button {
+  padding: 5px 20px;
+  background-color: #ff595a;
+  border: 2px solid #ff595a;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 300;
+  flex: 1;
+  margin: 0 5px;
+}
+
+#controls button:hover {
+  background-color: #e04e4f;
+}
+
+#clues-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+#clues-container h2 {
+  margin: 0;
+  color: #ff595a;
+}
+
+#horizontal-clues,
+#vertical-clues {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+
+.grid-cell {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  text-align: center;
+  line-height: 30px;
+  font-size: 18px;
+  background-color: white;
+  outline: none;
+}
+
+.dark-cell {
+  background-color: black;
+  pointer-events: none; /* Prevent any interaction with dark cells */
+}
+
+.header-cell {
+  background-color: #ddd;
+  font-weight: bold;
+  pointer-events: none; /* Prevent any interaction with header cells */
+}
+
+.highlighted {
+  background-color: #e0e0e0; /* Light gray background for highlighted cells */
+}
+
+#grid-and-clues {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex: 1;
+}
