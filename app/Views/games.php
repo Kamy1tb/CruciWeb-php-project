@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/global.css">
-    <link rel="stylesheet" href="../public/css/games.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/games.css">
     <title>Jeux Créés</title>
 </head>
 <body>
@@ -41,6 +41,6 @@
             <!-- Add more cards here -->
         </div>
     </div>
-    <script src="../public/js/games.js"></script>
+    <script src="../public/js/games.js?v=2"></script>
 </body>
 </html>

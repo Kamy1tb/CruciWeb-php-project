@@ -30,39 +30,38 @@ $routes = [
 session_start();
 $action = $_GET['action'] ?? '';
 
-
-/*if(isset($_POST['logout'])){
-    session_destroy(); 
-    $home = new UserController();
-    $home->index();
-}*/
-
-
-
-if($action == 'login'){
-    $controller = new UserController();
-    if (isset($_POST['username'])) {
+switch ($action) {
+    case 'login':
+        $controller = new UserController();
+            if (isset($_POST['username'])) {
         
-        $controller->login();
-    } else {
-        $controller->afficher_login();
-    }
-}
-elseif($action == 'signup'){
-    $controller = new UserController();
-    if (isset($_POST['username'])) {
-        $controller->signUp();
-    } else {
-        $controller->afficher_signup();
-    }
+            $controller->login();
+            } else {
+            $controller->afficher_login();
+                 }       
+                 break;
+    case 'signup':
+        $controller = new UserController();
+        if (isset($_POST['username'])) {
+            $controller->signUp();
+        } else {
+            $controller->afficher_signup();
+        }
+        break;
+
+    case '':
+        $home = new LandingController();
+        $home->index();
+        break;
+
+
+        default:
+        require '../app/Views/404.php';
+        break;
 }
 
 
-else{
-    session_destroy();
-    $home = new LandingController();
-    $home->index();
-     
-}
+
+
 
 ?>

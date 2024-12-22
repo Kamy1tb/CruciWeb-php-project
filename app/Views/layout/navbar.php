@@ -4,8 +4,8 @@
   </div>
   <div class="nav-center">
     <ul class="nav-links">
-      <li><a href="../index.php">Accueil</a></li>
-      <li><a href="../app/Views/games.php">Jouer</a></li>
+      <li><a href="../public/index.php">Accueil</a></li>
+      <li><a href="../public/index.php?action=play">Jouer</a></li>
       <li><a href="../app/Views/create.php">Créer</a></li>
       <li><a href="../app/Views/contact.php">Nous contacter</a></li>
     </ul>
