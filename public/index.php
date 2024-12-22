@@ -49,6 +49,11 @@ switch ($action) {
         }
         break;
 
+    case 'grids':
+        $controller = new GridController();
+        $controller->index();
+        break;
+
     case '':
         $home = new LandingController();
         $home->index();
