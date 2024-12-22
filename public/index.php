@@ -49,6 +49,13 @@ switch ($action) {
         }
         break;
 
+    case 'logout':
+        print_r($_SESSION);
+        $controller = new UserController();
+        $controller->logout();
+        $action = '';
+        break;
+
     case 'grids':
         $controller = new GridController();
         $controller->index();
