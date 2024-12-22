@@ -74,3 +74,29 @@ nav .login-button {
 nav .login-button:hover {
   background-color: #c03e3f;
 }
+
+nav .logged-in {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+}
+
+nav .logout-button {
+  color: #fff;
+  background-color: red;
+  text-decoration: none;
+  font-weight: 300;
+  padding: 9px 30px 9px 26px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+}
+
+nav .logout-button img {
+  width: 1.2rem;
+  margin-right: 0.8rem;
+}
+
+nav .logout-button:hover {
+  opacity: 90%;
+}

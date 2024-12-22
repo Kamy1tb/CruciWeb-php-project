@@ -5,9 +5,9 @@
   <div class="nav-center">
     <ul class="nav-links">
       <li><a href="../public/index.php">Accueil</a></li>
-      <li><a href="../public/index.php?action=play">Jouer</a></li>
-      <li><a href="../app/Views/create.php">Créer</a></li>
-      <li><a href="../app/Views/contact.php">Nous contacter</a></li>
+      <li><a href="../public/index.php?action=grids">Jouer</a></li>
+      <li><a href="../public/index.php?action=create">Créer</a></li>
+      <li><a href="../public/index.php?action=contact">Nous contacter</a></li>
     </ul>
   </div>
   <div class="nav-right" >
@@ -16,7 +16,13 @@
   if (isset($_SESSION['username'])) {
       // Récupérer et afficher le nom d'utilisateur
       $username = htmlspecialchars($_SESSION['username']); // Sécuriser l'entrée
-      echo "Bienvenue, $username!";
+      echo '<div class="logged-in">
+              <span> Bienvenue, '.$username.'!</span>
+              <a href="../public/index.php?action=logout" class="logout-button">
+                <img src="../public/images/logout.png" alt="Logout Icon">
+                <span>Logout</span>
+              </a>
+            </div>';
   } else {
       // Si 'username' n'existe pas, afficher le lien de connexion
       echo '<a href="../public/index.php?action=login" class="login-button">Se connecter</a>';
