@@ -18,7 +18,7 @@ public function getGridById($id) {
 }
 
 public function getAllGrids() {
-    $stmt = $this->db->query("SELECT (id_grille,id_user,nom,description)  FROM grille");
+    $stmt = $this->db->query("SELECT * FROM grille");
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 }

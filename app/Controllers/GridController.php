@@ -7,12 +7,12 @@ class GridController {
 
     public function __construct() {
         $database = new Database();
-        $this->gridModel = new UserModel($database);
+        $this->gridModel = new GridModel($database);
     }
 
     public function index() {
-        $users = $this->gridModel->getAllUsers();
-        require_once __DIR__ . '/../Views/users.php';
+        $grids = $this->gridModel->getAllGrids();
+        require_once __DIR__ . '/../Views/games.php';
     }
    
 

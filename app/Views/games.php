@@ -14,33 +14,23 @@
         <h1>Jeux Créés</h1>
         <div class="cards-container">
             <!-- Example card -->
+            <?php foreach ($grids as $grid): ?>
             <div class="game-card">
-                <h2>Nom du Jeu</h2>
-                <p class="creator">Par: Raid_ber</p>
-                <p class="difficulty"><span class="difficulty-circle facile"></span>Facile</p>
+                <h2><?= htmlspecialchars($grid['nom']); ?></h2>
+                <p class="creator">Par: <?= htmlspecialchars($grid['id_user']); ?></p>
+                <p class="difficulty">
+                    <span class="difficulty-circle <?= htmlspecialchars(strtolower($grid['difficulté'])); ?>"></span>
+                    <?= htmlspecialchars(ucfirst($grid['difficulté'])); ?>
+                </p>
                 <p class="estimated-time">Temps estimé: 15 mins</p>
-                <p class="description">Cette grille mettra à l’épreuve votre vocabulaire et vos connaissances générales.</p>
+                <p class="description"><?= htmlspecialchars($grid['description']); ?></p>
                 <button>Jouer</button>
             </div>
-            <div class="game-card">
-                <h2>Nom du Jeu</h2>
-                <p class="creator">Par: Raid_ber</p>
-                <p class="difficulty"><span class="difficulty-circle moyen"></span>moyen</p>
-                <p class="estimated-time">Temps estimé: 15 mins</p>
-                <p class="description">Cette grille mettra à l’épreuve votre vocabulaire et vos connaissances générales.</p>
-                <button>Jouer</button>
-            </div>
-            <div class="game-card">
-                <h2>Nom du Jeu</h2>
-                <p class="creator">Par: Raid_ber</p>
-                <p class="difficulty"><span class="difficulty-circle facile"></span>Facile</p>
-                <p class="estimated-time">Temps estimé: 15 mins</p>
-                <p class="description">Cette grille mettra à l’épreuve votre vocabulaire et vos connaissances générales.</p>
-                <button>Jouer</button>
-            </div>
+        <?php endforeach; ?>
             <!-- Add more cards here -->
         </div>
     </div>
     <script src="../public/js/games.js?v=2"></script>
+
 </body>
 </html>
