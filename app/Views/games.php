@@ -22,7 +22,7 @@
                     <span class="difficulty-circle <?= htmlspecialchars(strtolower($grid['difficulté'])); ?>"></span>
                     <?= htmlspecialchars(ucfirst($grid['difficulté'])); ?>
                 </p>
-                <p class="estimated-time">Temps estimé: 15 mins</p>
+                <p class="estimated-time">Temps estimé: <?= htmlspecialchars($grid['estimated_time']); ?> mins</p>
                 <p class="description"><?= htmlspecialchars($grid['description']); ?></p>
                 <button>Jouer</button>
             </div>
