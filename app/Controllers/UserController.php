@@ -54,7 +54,7 @@ class UserController {
         $params["path"], $params["domain"], 
         $params["secure"], $params["httponly"]
     );
-    header('Location: /cruciweb/public/index.php');
+    header('Location: /CruciWeb-php-project/public/index.php');
         exit();
     }
 

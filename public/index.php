@@ -61,6 +61,11 @@ switch ($action) {
         $controller->index();
         break;
 
+    case 'create':
+        $controller = new CreationController();
+        $controller->index();
+        break;
+
     case '':
         $home = new LandingController();
         $home->index();
