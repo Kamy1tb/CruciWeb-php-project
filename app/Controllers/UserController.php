@@ -32,8 +32,9 @@ class UserController {
 
         if ($user) {
             // Créer une session
-            $_SESSION['user_id'] = $user['id_user'];
+            $_SESSION['full_name'] = $user['full_name'];
             $_SESSION['username'] = $user['username'];
+            $_SESSION['email'] = $user['mail'];
 
             // Répondre avec succès
 
@@ -41,7 +42,12 @@ class UserController {
         } else {
             // Répondre avec une erreur
 
-            echo json_encode(['success' => false, 'message' => 'Identifiants incorrects.']);
+            http_response_code(401); // Code HTTP 401 Unauthorized
+            echo json_encode([
+            'error' => true,
+            'message' => 'Login ou mot de passe incorrect.'
+            ]);
+            exit; // Arrêter l'exécution
         }
     }
 
@@ -54,7 +60,7 @@ class UserController {
         $params["path"], $params["domain"], 
         $params["secure"], $params["httponly"]
     );
-    header('Location: /CruciWeb-php-project/public/index.php');
+    header('Location: ../public/index.php');
         exit();
     }
 

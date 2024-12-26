@@ -16,9 +16,10 @@
             <input type="hidden" name="action" value="login">
             <input type="text" id="username" name="username" placeholder="Nom d'utilisateur" required>
             <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+            <div id="error-message"></div>
             <button type="submit">Se connecter</button>
         </form>
-        <div id="error-message"></div>
+        
     </div>
     <script src="../public/js/login.js?v=2"></script>
 </body>
