@@ -37,6 +37,10 @@ body {
   border-radius: 50%;
 }
 
+.step-indicator :nth-child(1) {
+  background-color: #ff595a;
+}
+
 .separator {
   width: 100px;
   height: 5px;
@@ -141,4 +145,71 @@ button {
 
 button:hover {
   opacity: 90%;
+}
+
+#grid-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto 20px auto;
+  width: fit-content;
+}
+
+.grid-row {
+  display: flex;
+  width: fit-content;
+}
+
+.grid-cell {
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.grid-cell.highlighted {
+  background-color: #ff595a;
+}
+
+.header-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff595a;
+  font-weight: 900;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+.step3-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.clues-container {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.clues-container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.clues-container .clue-group {
+  margin-bottom: 10px;
+}
+
+.clues-container .clue-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.clues-container .clue-group input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }

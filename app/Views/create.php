@@ -12,11 +12,11 @@
     <div class="create-container">
         <h1>Création d'une nouvelle grille</h1>
         <div class="step-indicator">
-            <div class="step" id="step1-indicator">1</div>
-            <div class="separator" id="separator1"></div>
-            <div class="step" id="step2-indicator">2</div>
-            <div class="separator" id="separator2"></div>
-            <div class="step" id="step3-indicator">3</div>
+            <div class="step">1</div>
+            <div class="separator"></div>
+            <div class="step">2</div>
+            <div class="separator"></div>
+            <div class="step">3</div>
         </div>
         <form id="create-form">
             <div class="form-step" id="step1">
@@ -51,7 +51,7 @@
 
                 <div class="slider-group">
                     <label for="estimated-time">Temps estimé:</label>
-                    <input type="range" id="estimated-time" name="estimated-time" min="3" max="120" step="1" oninput="document.getElementById('output').textContent = this.value">
+                    <input type="range" id="estimated-time" name="estimated-time" min="3" max="120" step="1" value="3" oninput="document.getElementById('output').textContent = this.value">
                     <div><span id="output">3</span> minutes</div>
                 </div>
 
@@ -60,14 +60,21 @@
                 <button type="button" onclick="nextStep()">Suivant</button>
             </div>
             <div class="form-step" id="step2" style="display:none;">
-                <!-- Step 2 content goes here -->
+                <h2>Cliquez sur les cases noires</h2>
+                <div id="grid-container"></div>
                 <button type="button" onclick="prevStep()">Précédent</button>
                 <button type="button" onclick="nextStep()">Suivant</button>
             </div>
             <div class="form-step" id="step3" style="display:none;">
-                <!-- Step 3 content goes here -->
+                <div class="step3-container">
+                    <div id="grid-container-step3"></div>
+                    <div class="clues-container">
+                        <h2>Créer des indices</h2>
+                        <div id="clues-form"></div>
+                    </div>
+                </div>
                 <button type="button" onclick="prevStep()">Précédent</button>
-                <button type="submit">Soumettre</button>
+                <button type="button" id="submit-button">Soumettre</button>
             </div>
         </form>
     </div>
