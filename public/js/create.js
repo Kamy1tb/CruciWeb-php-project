@@ -379,4 +379,19 @@ function generateFinalObject() {
   };
 
   console.log(JSON.stringify(finalObject));
+  $.ajax({
+    url: '../public/index.php?action=create',
+    method: 'POST',
+    data: finalObject, 
+  
+    success: function (response) {
+        console.log(response);
+        window.location.href = '../public/index.php';
+        return response;
+    },
+    error: function (xhr, status, error) {
+      console.log("Status:", status);
+      console.log("Requête renvoyée :", xhr.responseText);
+    }
+});
 }

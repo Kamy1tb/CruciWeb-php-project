@@ -62,9 +62,23 @@ switch ($action) {
         break;
 
     case 'create':
-        $controller = new CreationController();
-        $controller->index();
-        break;
+        if (isset($_SESSION['username'])) {
+
+            if(isset($_POST['gridData'])) {
+                $controller = new LandingController();
+                $controller->index();
+                break;
+            } else {
+                $controller = new CreationController();
+                $controller->index();
+                break;
+            }
+
+        } else {
+            $controller = new UserController();
+            $controller->afficher_login();
+            break;
+        }
 
     case '':
         $home = new LandingController();

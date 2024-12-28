@@ -60,7 +60,7 @@ class UserController {
         $params["path"], $params["domain"], 
         $params["secure"], $params["httponly"]
     );
-    header('Location: ../public/index.php');
+    header('Location: ../public/index.php'); 
         exit();
     }
 
