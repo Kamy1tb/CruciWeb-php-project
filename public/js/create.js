@@ -98,13 +98,17 @@ function validateStep2() {
   const description = document.getElementById("description").value;
   const blackSquares = [];
 
-  document.querySelectorAll(".grid-row").forEach((row, rowIndex) => {
-    row.querySelectorAll(".grid-cell").forEach((cell, cellIndex) => {
-      if (cell.classList.contains("highlighted")) {
-        blackSquares.push({ x: cellIndex + 1, y: rowIndex });
-      }
-    });
-  });
+  if (blackSquares.length === 0) {
+    document
+      .querySelectorAll("#grid-container .grid-row")
+      .forEach((row, rowIndex) => {
+        row.querySelectorAll(".grid-cell").forEach((cell, cellIndex) => {
+          if (cell.classList.contains("highlighted")) {
+            blackSquares.push({ x: cellIndex + 1, y: rowIndex });
+          }
+        });
+      });
+  }
 
   gridData = {
     gridName: gridName,
@@ -202,10 +206,6 @@ function generateClues() {
   const width = gridData.width;
   const blackSquares = gridData.blackSquares;
 
-  console.log("black squares", blackSquares);
-  console.log("height", height);
-  console.log("width", width);
-
   const cluesForm = document.getElementById("clues-form");
   cluesForm.innerHTML = "";
 
@@ -235,7 +235,7 @@ function generateClues() {
         label.textContent = `Horizontal ${i}.${clueCount}`;
         const input = document.createElement("input");
         input.type = "text";
-        input.name = `${i}.${clueCount}`;
+        input.name = `horizontal-${i}-${clueCount}`;
         input.required = true;
         clueGroup.appendChild(label);
         clueGroup.appendChild(input);
@@ -272,7 +272,7 @@ function generateClues() {
         label.textContent = `Vertical ${j}.${clueCount}`;
         const input = document.createElement("input");
         input.type = "text";
-        input.name = `${j}.${clueCount}`;
+        input.name = `vertical-${j}-${clueCount}`;
         input.required = true;
         clueGroup.appendChild(label);
         clueGroup.appendChild(input);
@@ -290,7 +290,35 @@ function isBlackSquare(x, y, blackSquares) {
 
 document
   .getElementById("submit-button")
-  .addEventListener("click", generateFinalObject);
+  .addEventListener("click", validateStep3);
+
+function validateStep3() {
+  // Check if all clue inputs are filled
+  let allCluesFilled = true;
+  document.querySelectorAll(".clue-group input").forEach((input) => {
+    if (!input.value) {
+      allCluesFilled = false;
+    }
+  });
+
+  // Check if all grid cells are filled
+  let allCellsFilled = true;
+  document
+    .querySelectorAll("#grid-container-step3 .grid-cell")
+    .forEach((cell) => {
+      if (!cell.classList.contains("highlighted") && !cell.textContent) {
+        allCellsFilled = false;
+      }
+    });
+
+  if (allCluesFilled && allCellsFilled) {
+    generateFinalObject();
+  } else {
+    alert(
+      "Veuillez remplir tous les champs et toutes les cellules de la grille."
+    );
+  }
+}
 
 function generateFinalObject() {
   const clues = {};
@@ -330,7 +358,7 @@ function generateFinalObject() {
       }
       if (wordLength > 1) {
         clueCount++;
-        solutions[`${i}.${clueCount}`] = word;
+        solutions[`horizontal-${i}-${clueCount}`] = word;
         j += wordLength;
       }
       ++j;
@@ -365,33 +393,31 @@ function generateFinalObject() {
       }
       if (wordLength > 1) {
         clueCount++;
-        solutions[`${j}.${clueCount}`] = word;
+        solutions[`vertical-${j}-${clueCount}`] = word;
         i += wordLength;
       }
       ++i;
     }
   }
-
   const finalObject = {
     gridData: gridData,
     clues: clues,
     solutions: solutions,
   };
-
   console.log(JSON.stringify(finalObject));
-  $.ajax({
-    url: '../public/index.php?action=create',
-    method: 'POST',
-    data: finalObject, 
-  
-    success: function (response) {
-        console.log(response);
-        window.location.href = '../public/index.php';
-        return response;
-    },
-    error: function (xhr, status, error) {
-      console.log("Status:", status);
-      console.log("Requête renvoyée :", xhr.responseText);
-    }
-});
+  //   $.ajax({
+  //     url: '../public/index.php?action=create',
+  //     method: 'POST',
+  //     data: finalObject,
+
+  //     success: function (response) {
+  //         console.log(response);
+  //         window.location.href = '../public/index.php';
+  //         return response;
+  //     },
+  //     error: function (xhr, status, error) {
+  //       console.log("Status:", status);
+  //       console.log("Requête renvoyée :", xhr.responseText);
+  //     }
+  // });
 }
