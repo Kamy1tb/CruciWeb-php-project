@@ -65,8 +65,10 @@ switch ($action) {
         if (isset($_SESSION['username'])) {
 
             if(isset($_POST['gridData'])) {
-                $controller = new LandingController();
-                $controller->index();
+                // Décoder le JSON en tableau associatif
+                
+                $controller = new CreationController();
+                $controller->create();
                 break;
             } else {
                 $controller = new CreationController();
