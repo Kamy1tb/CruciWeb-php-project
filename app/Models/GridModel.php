@@ -11,9 +11,9 @@ public function __construct(Database $database) {
 }
 
 
-public function getGridById($id) {
-    $stmt = $this->db->prepare("SELECT *FROM grid WHERE id = :id");
-    $stmt->execute(['id' => $id]);
+public function getGridById($id_grille) {
+    $stmt = $this->db->prepare("SELECT * FROM grille WHERE id_grille = :id_grille");
+    $stmt->execute(['id_grille' => $id_grille]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 

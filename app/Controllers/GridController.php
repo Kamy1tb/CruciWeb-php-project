@@ -13,4 +13,9 @@ class GridController {
         $grids = $this->gridModel->getAllGrids();
         require_once __DIR__ . '/../Views/games.php';
     }
+    public function show_grid() {
+        $gridId = $_GET['gridId'];
+        $grid = $this->gridModel->getGridById($gridId);
+        print_r($grid);
+    }
 }

@@ -17,7 +17,16 @@ document.addEventListener("DOMContentLoaded", () => {
     displayGrids();
   });
 
+  document.querySelectorAll('.play-button').forEach(button => {
+    button.addEventListener('click', function(event) {;
+        const gridId = button.getAttribute("data-grid-id");
+        handlePlayButtonClick(gridId);
+    });
+  });
+
   function displayGrids() {
+
+    
     const sortBy = sortBySelect.value;
     const sortOrder = sortOrderSelect.value;
     console.log(
@@ -70,12 +79,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p class="creation-date">Date de création: ${new Date(
                   grid.date
                 ).toLocaleDateString()}</p>
-                <button>Jouer</button>
+                <button type="button" data-grid-id="${grid.id_grille}" class="play-button">Jouer</button>
             `;
       cardsContainer.appendChild(card);
     });
 
     setupPagination(Math.ceil(grids.length / itemsPerPage));
+
+    document.querySelectorAll('.play-button').forEach(button => {
+      button.addEventListener('click', function(event) {;
+          const gridId = button.getAttribute("data-grid-id");
+          handlePlayButtonClick(gridId);
+      });
+    });
   }
 
   function setupPagination(totalPages) {
@@ -96,4 +112,26 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   displayGrids();
-});
+
+  
+  
+  
+  function handlePlayButtonClick(gridId) {
+    console.log(`Play button clicked for grid ${gridId}`);
+    $.ajax({
+      url: '../public/index.php?action=grids',
+      method: 'GET',
+      data: gridId,
+
+      success: function (response) {
+         console.log(response);
+         window.location.href = '../public/index.php?action=grids&gridId=' + gridId;
+         return response;
+      },
+      error: function (xhr, status, error) {
+        console.log("Status:", status);
+        console.log("Requête renvoyée :", xhr.responseText);
+      }
+  });
+  }
+}); 
