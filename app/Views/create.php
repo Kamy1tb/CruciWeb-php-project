@@ -26,9 +26,9 @@
 
                     <select id="difficulty" name="difficulty" required>
                         <option value="" disabled selected>Difficulté</option>
-                        <option value="easy">Facile</option>
-                        <option value="medium">Moyenne</option>
-                        <option value="hard">Difficile</option>
+                        <option value="facile">facile</option>
+                        <option value="moyen">moyen</option>
+                        <option value="difficile">difficile</option>
                     </select>
 
                 </div>
