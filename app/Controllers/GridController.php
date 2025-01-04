@@ -16,6 +16,10 @@ class GridController {
     public function show_grid() {
         $gridId = $_GET['gridId'];
         $grid = $this->gridModel->getGridById($gridId);
+        if ($grid === "grid not found") {
+            require_once __DIR__ . '/../Views/404.php';
+            return;
+        }
         print_r($grid);
     }
 }

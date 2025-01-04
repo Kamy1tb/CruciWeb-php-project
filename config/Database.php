@@ -2,8 +2,8 @@
 class Database {
     private $host = 'localhost';
     private $dbname = 'cruciweb';
-    private $user = 'root';
-    private $password = '';
+    private $user = 'user';
+    private $password = '0000';
     private $pdo;
 
     public function __construct() {
