@@ -1,12 +1,22 @@
 <?php
+require __DIR__ . '/../vendor/autoload.php';
+use Dotenv\Dotenv;
+
+// Charger le fichier .env
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../'); // Chemin où se trouve le fichier .env
+$dotenv->load();
 class Database {
-    private $host = 'localhost';
-    private $dbname = 'cruciweb';
-    private $user = 'user';
-    private $password = '0000';
+    private $host;
+    private $dbname;
+    private $user ;
+    private $password ;
     private $pdo;
 
     public function __construct() {
+        $this->host = $_ENV['DB_HOST'];
+        $this->dbname = $_ENV['DB_NAME'];
+        $this->user = $_ENV['DB_USER'];
+        $this->password = $_ENV['DB_PASSWORD'];
         $this->connect();
     }
 
