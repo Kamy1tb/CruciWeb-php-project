@@ -200,6 +200,10 @@ function moveToNextCell(currentIndex) {
   }
 }
 
+function isBlackSquare(x, y, blackSquares) {
+  return blackSquares.some((square) => square.x === x && square.y === y);
+}
+
 function generateClues() {
   const height = gridData.height;
   const width = gridData.width;
@@ -255,9 +259,6 @@ function generateClues() {
   const verticalTitle = document.createElement("h3");
   verticalTitle.textContent = "Verticalement:";
   cluesForm.appendChild(verticalTitle);
-  function isBlackSquare(x, y, blackSquares) {
-    return blackSquares.some((square) => square.x === x && square.y === y);
-  }
 
   clueCount = 0;
   wordLength = 0;
