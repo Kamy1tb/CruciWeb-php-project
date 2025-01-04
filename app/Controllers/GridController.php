@@ -1,5 +1,4 @@
 <?php
-// Assurez-vous que Database.php est bien inclus
 require_once __DIR__ . '/../Models/GridModel.php';
 
 class GridController {
@@ -14,6 +13,4 @@ class GridController {
         $grids = $this->gridModel->getAllGrids();
         require_once __DIR__ . '/../Views/games.php';
     }
-   
-
 }
