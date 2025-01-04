@@ -6,7 +6,6 @@ body {
 }
 
 .create-container {
-  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
   text-align: center;
@@ -147,6 +146,11 @@ button:hover {
   opacity: 90%;
 }
 
+#step1 {
+  max-width: 70%;
+  margin: auto;
+}
+
 #grid-container {
   display: flex;
   flex-direction: column;
@@ -160,10 +164,16 @@ button:hover {
 }
 
 .grid-cell {
-  width: 3rem;
-  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.2rem;
+  height: 3.2rem;
   border: 1px solid black;
   cursor: pointer;
+}
+.grid-cell:focus {
+  outline: none;
 }
 
 .grid-cell.highlighted {
@@ -176,19 +186,28 @@ button:hover {
   justify-content: center;
   color: #ff595a;
   font-weight: 900;
-  width: 3rem;
-  height: 3rem;
+  width: 3.2rem;
+  height: 3.2rem;
   border: 1px solid white;
   cursor: pointer;
 }
 
 .step3-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+}
+
+#grid-container-step3 {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 2rem;
 }
 
 .clues-container {
-  flex: 1;
+  width: 30%;
+  max-width: 800px;
   margin-left: 20px;
 }
 
@@ -207,9 +226,24 @@ button:hover {
 }
 
 .clues-container .clue-group input {
-  width: calc(100% - 20px);
+  width: 90%;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+/* Add this CSS to style the clue groups */
+.clue-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.clue-group label {
+  width: 3.2rem;
+}
+
+.clue-group input {
+  flex-grow: 1;
 }

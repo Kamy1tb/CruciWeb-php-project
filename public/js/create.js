@@ -1,5 +1,6 @@
 let currentStep = 1;
 let gridData = {};
+const alphabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 function showStep(step) {
   document.querySelectorAll(".form-step").forEach((element, index) => {
@@ -129,8 +130,6 @@ function generateGrid() {
   const gridContainer = document.getElementById("grid-container");
   gridContainer.innerHTML = ""; // Clear previous grid
 
-  const alphabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
   // Add column headers
   const headerRow = document.createElement("div");
   headerRow.classList.add("grid-row");
@@ -211,6 +210,12 @@ function generateClues() {
 
   let clueCount = 0;
   let wordLength = 0;
+
+  // Add title for horizontal clues
+  const horizontalTitle = document.createElement("h3");
+  horizontalTitle.textContent = "Horizontalement:";
+  cluesForm.appendChild(horizontalTitle);
+
   // Generate horizontal clues
   for (let i = 1; i <= height; i++) {
     clueCount = 0;
@@ -232,10 +237,10 @@ function generateClues() {
         const clueGroup = document.createElement("div");
         clueGroup.classList.add("clue-group");
         const label = document.createElement("label");
-        label.textContent = `Horizontal ${i}.${clueCount}`;
+        label.textContent = `${i}.${clueCount}`;
         const input = document.createElement("input");
         input.type = "text";
-        input.name = `horizontal-${i}-${clueCount}`;
+        input.name = `${i}.${clueCount}`;
         input.required = true;
         clueGroup.appendChild(label);
         clueGroup.appendChild(input);
@@ -244,6 +249,14 @@ function generateClues() {
       }
       ++j;
     }
+  }
+
+  // Add title for vertical clues
+  const verticalTitle = document.createElement("h3");
+  verticalTitle.textContent = "Verticalement:";
+  cluesForm.appendChild(verticalTitle);
+  function isBlackSquare(x, y, blackSquares) {
+    return blackSquares.some((square) => square.x === x && square.y === y);
   }
 
   clueCount = 0;
@@ -269,10 +282,10 @@ function generateClues() {
         const clueGroup = document.createElement("div");
         clueGroup.classList.add("clue-group");
         const label = document.createElement("label");
-        label.textContent = `Vertical ${j}.${clueCount}`;
+        label.textContent = `${alphabet[j]}.${clueCount}`;
         const input = document.createElement("input");
         input.type = "text";
-        input.name = `vertical-${j}-${clueCount}`;
+        input.name = `${alphabet[j]}.${clueCount}`;
         input.required = true;
         clueGroup.appendChild(label);
         clueGroup.appendChild(input);
@@ -282,10 +295,6 @@ function generateClues() {
       ++i;
     }
   }
-}
-
-function isBlackSquare(x, y, blackSquares) {
-  return blackSquares.some((square) => square.x === x && square.y === y);
 }
 
 document
@@ -358,7 +367,7 @@ function generateFinalObject() {
       }
       if (wordLength > 1) {
         clueCount++;
-        solutions[`horizontal-${i}-${clueCount}`] = word;
+        solutions[`${i}.${clueCount}`] = word;
         j += wordLength;
       }
       ++j;
@@ -393,7 +402,7 @@ function generateFinalObject() {
       }
       if (wordLength > 1) {
         clueCount++;
-        solutions[`vertical-${j}-${clueCount}`] = word;
+        solutions[`${alphabet[j]}.${clueCount}`] = word;
         i += wordLength;
       }
       ++i;
@@ -406,19 +415,19 @@ function generateFinalObject() {
   };
   console.log(JSON.stringify(finalObject));
   $.ajax({
-       url: '../public/index.php?action=create',
-       method: 'POST',
-       data: finalObject,
+    url: "../public/index.php?action=create",
+    method: "POST",
+    data: finalObject,
 
-       success: function (response) {
-          console.log(response);
-          console.log(finalObject)
-          window.location.href = '../public/index.php';
-          return response;
-       },
-       error: function (xhr, status, error) {
-         console.log("Status:", status);
-         console.log("Requête renvoyée :", xhr.responseText);
-       }
-   });
+    success: function (response) {
+      console.log(response);
+      console.log(finalObject);
+      window.location.href = "../public/index.php";
+      return response;
+    },
+    error: function (xhr, status, error) {
+      console.log("Status:", status);
+      console.log("Requête renvoyée :", xhr.responseText);
+    },
+  });
 }
