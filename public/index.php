@@ -57,8 +57,13 @@ switch ($action) {
         break;
 
     case 'grids':
-        $controller = new GridController();
-        $controller->index();
+        if (isset($_GET['gridId'])) {
+            $controller = new GridController();
+            $controller->show_grid();
+        } else {
+            $controller = new GridController();
+            $controller->index();
+        }
         break;
 
     case 'create':
