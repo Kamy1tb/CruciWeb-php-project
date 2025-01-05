@@ -223,7 +223,6 @@ document
     const answers = JSON.parse(grid.solutions);
     const blackSquares = JSON.parse(grid.case_noire);
 
-    console.log(answers);
     const gridContainer = document.getElementById("grid-container");
     const rows = gridContainer.querySelectorAll(".grid-row");
     let allCellsFilled = true;
@@ -318,36 +317,128 @@ document
       // Convert the hash to a hex string
       return hash.toString(CryptoJS.enc.Hex);
     };
-    
+
     const hashSolutions = (solutions) => {
       const hashedSolutions = {};
       for (const key in solutions) {
         hashedSolutions[key] = hashSolution(solutions[key]);
       }
-      console.log(hashedSolutions);
       return hashedSolutions;
     };
-    
-    (async () => {    
+
+    (async () => {
       const hashedSolutions = hashSolutions(solutions);
-    
+
       // Function to compare two objects
       const areObjectsEqual = (obj1, obj2) => {
         const keys1 = Object.keys(obj1);
         const keys2 = Object.keys(obj2);
-    
+
         // Check if they have the same number of keys
         if (keys1.length !== keys2.length) return false;
-    
+
         // Check if all values are equal
         return keys1.every((key) => obj1[key] === obj2[key]);
       };
-    
+
       if (areObjectsEqual(hashedSolutions, answers)) {
         alert("La solution est correcte !");
       } else {
         alert("La solution est incorrecte.");
       }
     })();
-    
   });
+
+document.getElementById("save-solution").addEventListener("click", function () {
+  const blackSquares = JSON.parse(grid.case_noire);
+
+  const gridContainer = document.getElementById("grid-container");
+  const rows = gridContainer.querySelectorAll(".grid-row");
+
+  const solutions = {};
+
+  // Generate horizontal solutions
+  for (let i = 1; i <= grid.height; i++) {
+    let clueCount = 0;
+    let j = 1;
+    while (j <= grid.width) {
+      while (isBlackSquare(j, i, blackSquares) && j <= grid.width) {
+        ++j;
+      }
+      if (j === grid.width) break;
+      let wordLength = 0;
+      let word = "";
+      while (
+        j + wordLength <= grid.width &&
+        !isBlackSquare(j + wordLength, i, blackSquares)
+      ) {
+        const cell = document.querySelector(
+          `#grid-container .grid-row:nth-child(${i + 1}) .grid-cell:nth-child(${
+            j + wordLength + 1
+          })`
+        );
+        word += cell.textContent.trim() || " "; // Add a blank for empty cells
+        wordLength++;
+      }
+      if (wordLength > 1) {
+        clueCount++;
+        solutions[`${i}.${clueCount}`] = word;
+        j += wordLength;
+      }
+      ++j;
+    }
+  }
+
+  // Generate vertical solutions
+  for (let j = 1; j <= grid.width; j++) {
+    let clueCount = 0;
+    let i = 1;
+    while (i <= grid.height) {
+      while (isBlackSquare(j, i, blackSquares) && i <= grid.height) {
+        ++i;
+      }
+      if (i === grid.height) break;
+      let wordLength = 0;
+      let word = "";
+      while (
+        i + wordLength <= grid.height &&
+        !isBlackSquare(j, i + wordLength, blackSquares)
+      ) {
+        const cell = document.querySelector(
+          `#grid-container .grid-row:nth-child(${
+            i + wordLength + 1
+          }) .grid-cell:nth-child(${j + 1})`
+        );
+        word += cell.textContent.trim() || " "; // Add a blank for empty cells
+        wordLength++;
+      }
+      if (wordLength > 1) {
+        clueCount++;
+        solutions[`${alphabet[j]}.${clueCount}`] = word;
+        i += wordLength;
+      }
+      ++i;
+    }
+  }
+
+  const finalObject = {
+    gridId: grid.id_grille,
+    gridData: solutions,
+  };
+
+  $.ajax({
+    url: "index.php?action=saved",
+    method: "POST",
+    data: finalObject,
+
+    success: function (response) {
+      console.log(response);
+      console.log(finalObject);
+      return response;
+    },
+    error: function (xhr, status, error) {
+      console.log("Status:", status);
+      console.log("Requête renvoyée :", xhr.responseText);
+    },
+  });
+});

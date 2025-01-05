@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="public/css/global.css">
     <link rel="stylesheet" href="public/css/board.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Jeu de Mots Croisés</title>
 </head>
 <body>

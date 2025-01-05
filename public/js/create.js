@@ -414,7 +414,6 @@ function generateFinalObject() {
     clues: clues,
     solutions: solutions,
   };
-  console.log(JSON.stringify(finalObject));
   $.ajax({
     url: "index.php?action=create",
     method: "POST",
