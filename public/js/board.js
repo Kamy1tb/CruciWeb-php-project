@@ -312,44 +312,42 @@ document
       }
     }
 
-    const hashSolution = async (solution) => {
-      const encoder = new TextEncoder();
-      const data = encoder.encode(solution);
-      const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      return hashArray
-        .map((byte) => byte.toString(16).padStart(2, "0"))
-        .join("");
+    const hashSolution = (solution) => {
+      // Convert the solution to SHA-256 hash
+      const hash = CryptoJS.SHA256(solution);
+      // Convert the hash to a hex string
+      return hash.toString(CryptoJS.enc.Hex);
     };
-
-    const hashSolutions = async (solutions) => {
+    
+    const hashSolutions = (solutions) => {
       const hashedSolutions = {};
       for (const key in solutions) {
-        hashedSolutions[key] = await hashSolution(solutions[key]);
+        hashedSolutions[key] = hashSolution(solutions[key]);
       }
       console.log(hashedSolutions);
       return hashedSolutions;
     };
-
-    (async () => {
-      const hashedSolutions = await hashSolutions(solutions);
-
+    
+    (async () => {    
+      const hashedSolutions = hashSolutions(solutions);
+    
       // Function to compare two objects
       const areObjectsEqual = (obj1, obj2) => {
         const keys1 = Object.keys(obj1);
         const keys2 = Object.keys(obj2);
-
+    
         // Check if they have the same number of keys
         if (keys1.length !== keys2.length) return false;
-
+    
         // Check if all values are equal
         return keys1.every((key) => obj1[key] === obj2[key]);
       };
-
+    
       if (areObjectsEqual(hashedSolutions, answers)) {
         alert("La solution est correcte !");
       } else {
         alert("La solution est incorrecte.");
       }
     })();
+    
   });
