@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/games.css">
+    <link rel="stylesheet" href="public/css/global.css">
+    <link rel="stylesheet" href="public/css/games.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Jeux Créés</title>
 </head>
@@ -45,6 +45,6 @@
     <script>
         const phpData = <?php echo json_encode($grids); ?>;
     </script>
-    <script src="js/games.js"></script>
+    <script src="public/js/games.js"></script>
 </body>
 </html>

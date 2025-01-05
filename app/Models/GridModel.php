@@ -1,6 +1,6 @@
 <?php
 // Assurez-vous que Database.php est bien inclus
-require_once '../config/Database.php';
+require_once $_SERVER['DOCUMENT_ROOT']. '/cruciweb/config/Database.php';
 
 class GridModel {
 private $db;

@@ -1,7 +1,7 @@
 <?php
 // Autoloader pour charger les classes
 spl_autoload_register(function ($class) {
-    $path = '../app/';
+    $path = 'app/';
     $extensions = ['Controllers', 'Models','Views'];
 
     // Essayer de charger depuis les deux dossiers (controllers et models)
@@ -11,21 +11,11 @@ spl_autoload_register(function ($class) {
         }
     }
     // Charger Database.php
-    if (file_exists('../config/Database.php')) {
-        require_once '../config/Database.php';
+    if (file_exists('config/Database.php')) {
+        require_once 'config/Database.php';
     }
 });
 
-$routes = [
-    'login' => function () {
-        $controller = new UserController();
-        $controller->login();
-    },
-    'register' => function () {
-        $controller = new AuthController($pdo);
-        $controller->register();
-    },
-];
 
 session_start();
 $action = $_GET['action'] ?? '';
@@ -94,7 +84,7 @@ switch ($action) {
 
 
         default:
-        require '../app/Views/404.php';
+        require ($_SERVER['DOCUMENT_ROOT'].'/cruciweb/app/Views/404.php');
         break;
 }
 

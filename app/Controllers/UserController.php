@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../Models/UserModel.php';
+require_once $_SERVER['DOCUMENT_ROOT']. '/cruciweb/app/Models/UserModel.php';
 
 class UserController {
     private $userModel;
@@ -11,15 +11,15 @@ class UserController {
 
     public function index() {
         $users = $this->userModel->getAllUsers();
-        require_once __DIR__ . '/../Views/users.php';
+        require_once $_SERVER['DOCUMENT_ROOT']. '/cruciweb/app/Views/users.php';
     }
 
     public function afficher_login() {
-        require_once __DIR__ . '/../Views/login.php';
+        require_once $_SERVER['DOCUMENT_ROOT']. '/cruciweb/app/Views/login.php';
     }
 
     public function afficher_signup() {
-        require_once __DIR__ . '/../Views/signup.php';
+        require_once $_SERVER['DOCUMENT_ROOT']. '/cruciweb/app/Views/signup.php';
     }
 
     public function login() {
@@ -60,7 +60,7 @@ class UserController {
         $params["path"], $params["domain"], 
         $params["secure"], $params["httponly"]
     );
-    header('Location: ../public/index.php'); 
+    header('Location: /../cruciweb/index.php'); 
         exit();
     }
 

@@ -1,6 +1,6 @@
 <?php
 // Assurez-vous que Database.php est bien inclus
-require_once __DIR__ . '/../Models/CreationModel.php';
+require_once $_SERVER['DOCUMENT_ROOT']. '/cruciweb/app/Models/CreationModel.php';
 
 class CreationController {
     private $creationModel;

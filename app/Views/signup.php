@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/global.css">
-    <link rel="stylesheet" href="../public/css/signup.css">
+    <link rel="stylesheet" href="public/css/global.css">
+    <link rel="stylesheet" href="public/css/signup.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Inscription</title>
 </head>
 <body>
     <div class="signup-container container">
-        <img src="../public/images/logo.png" alt="Logo" class="logo">
+        <img src="public/images/logo.png" alt="Logo" class="logo">
         <h1>Créez votre compte</h1>
         <p>Créez un compte pour profiter de toutes les fonctionnalités</p>
-        <form id="signup-form" action="../public/index.php" method="POST">
+        <form id="signup-form" action="public/index.php" method="POST">
             <input type="hidden" name="action" value="signup">
             <div class="form-group">
                 <input type="text" id="username" name="username" placeholder="Nom d'utilisateur" required>
@@ -27,6 +27,6 @@
         </form>
         
     </div>
-    <script src="../public/js/signup.js"></script>
+    <script src="public/js/signup.js"></script>
 </body>
 </html>

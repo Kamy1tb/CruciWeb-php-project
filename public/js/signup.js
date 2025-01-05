@@ -14,13 +14,13 @@ document
 
     console.log(formData);
     $.ajax({
-      url: '../public/index.php?action=signup',
+      url: 'index.php?action=signup',
       method: 'POST',
       data: formData, // L'objet FormData contenant les données du formulaire
     
       success: function (response) {
           console.log(response);
-          window.location.href = '../public/index.php';
+          window.location.href = 'index.php';
           return response;
       },
       error: function (xhr, status, error) {

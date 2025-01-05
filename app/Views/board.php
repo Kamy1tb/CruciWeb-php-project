@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/global.css">
-    <link rel="stylesheet" href="../public/css/board.css">
+    <link rel="stylesheet" href="public/css/global.css">
+    <link rel="stylesheet" href="public/css/board.css">
     <title>Jeu de Mots Croisés</title>
 </head>
 <body>
@@ -62,6 +62,6 @@
     <script>
         const grid = <?php echo json_encode($grid); ?>;
     </script>
-    <script src="../public/js/board.js"></script>
+    <script src="public/js/board.js"></script>
 </body>
 </html>

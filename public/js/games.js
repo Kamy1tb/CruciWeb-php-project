@@ -115,14 +115,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function handlePlayButtonClick(gridId) {
     console.log(`Play button clicked for grid ${gridId}`);
     $.ajax({
-      url: "../public/index.php?action=grids",
+      url: "index.php?action=grids",
       method: "GET",
       data: gridId,
 
       success: function (response) {
         console.log(response);
         window.location.href =
-          "../public/index.php?action=grids&gridId=" + gridId;
+          "index.php?action=grids&gridId=" + gridId;
         return response;
       },
       error: function (xhr, status, error) {

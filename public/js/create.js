@@ -416,14 +416,14 @@ function generateFinalObject() {
   };
   console.log(JSON.stringify(finalObject));
   $.ajax({
-    url: "../public/index.php?action=create",
+    url: "index.php?action=create",
     method: "POST",
     data: finalObject,
 
     success: function (response) {
       console.log(response);
       console.log(finalObject);
-      window.location.href = "../public/index.php";
+      window.location.href = "index.php";
       return response;
     },
     error: function (xhr, status, error) {

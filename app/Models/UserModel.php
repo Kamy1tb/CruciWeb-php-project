@@ -1,18 +1,31 @@
 <?php
 // Assurez-vous que Database.php est bien inclus
-require_once '../config/Database.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/cruciweb/config/Database.php';
 
 class UserModel {
     private $db;
-
+    private $db_admin;
     public function __construct(Database $database) {
         // Initialisation de la connexion PDO
         $this->db = $database->getPDO();
+        $this->db_admin = $database->getPDO_admin();
     }
 
     // Authentifier l'utilisateur
     public function authenticate($username, $password) {
         $stmt = $this->db->prepare("SELECT * FROM user WHERE username = :username");
+        $stmt->execute(['username' => $username]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Vérifier le mot de passe avec password_verify pour une sécurité accrue
+        if ($user && password_verify($password, $user['password'])) {
+            return $user; // Connexion réussie
+        }
+        return false; // Identifiants incorrects
+    }
+
+    public function authenticate_admin($username, $password) {
+        $stmt = $this->db_admin->prepare("SELECT * FROM admin WHERE username = :username");
         $stmt->execute(['username' => $username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -47,6 +60,14 @@ class UserModel {
 
         
     }
+
+    public function deleteUser($username) {
+        $stmt = $this->db_admin->prepare("DELETE FROM user WHERE username = :username");
+        $stmt->execute(['username' => $username]);
+        return "Utilisateur supprimé avec succès.";
+    }
+
+
 
     public function getAllUsers() {
         $stmt = $this->db->query("SELECT * FROM user");

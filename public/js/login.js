@@ -11,13 +11,13 @@ document
 
 
     $.ajax({
-      url: '../public/index.php?action=login',
+      url: 'index.php?action=login',
       method: 'POST',
       data: formData, // L'objet FormData contenant les données du formulaire
     
       success: function (response) {
           console.log(response);
-          window.location.href = '../public/index.php';
+          window.location.href = 'index.php';
           return response;
       },
       error: function (xhr, status, error) {

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/global.css">
-    <link rel="stylesheet" href="../public/css/create.css">
+    <link rel="stylesheet" href="public/css/global.css">
+    <link rel="stylesheet" href="public/css/create.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Créer une grille</title>
 </head>
@@ -79,6 +79,6 @@
             </div>
         </form>
     </div>
-    <script src="../public/js/create.js"></script>
+    <script src="public/js/create.js"></script>
 </body>
 </html>
