@@ -1,6 +1,10 @@
 <?php
+namespace App\Config;
 require __DIR__ . '/../vendor/autoload.php';
+
 use Dotenv\Dotenv;
+use PDO;
+use PDOException;
 
 // Charger le fichier .env
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../'); // Chemin où se trouve le fichier .env

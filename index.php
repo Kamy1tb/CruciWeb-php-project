@@ -16,10 +16,35 @@ spl_autoload_register(function ($class) {
     }
 });
 
+require_once __DIR__ . '/vendor/autoload.php';
+use App\Controllers\LandingController;
+use App\Controllers\AdminController;
+use App\Controllers\UserController;
+use App\Controllers\GridController;
+use App\Controllers\CreationController;
 
 session_start();
 $action = $_GET['action'] ?? '';
 
+if (isset($_SESSION["username"]) && $_SESSION['username'] == 'admin_cruciweb') {
+    switch ($action) {
+        case '':
+            $controller = new AdminController();
+            $controller->index();
+            break;
+        case 'logout':
+            $controller = new UserController();
+            $controller->logout();
+            $action = '';
+            break;
+        case 'delete_user':
+            $controller = new AdminController();
+            $controller->delete_user($_GET['username']);
+            break;
+    }
+
+}
+else{
 switch ($action) {
     case 'login':
         $controller = new UserController();
@@ -40,7 +65,6 @@ switch ($action) {
         break;
 
     case 'logout':
-        print_r($_SESSION);
         $controller = new UserController();
         $controller->logout();
         $action = '';
@@ -54,6 +78,27 @@ switch ($action) {
             $controller = new GridController();
             $controller->index();
         }
+        break;
+
+    case 'created':
+        $controller = new GridController();
+        $controller->show_created_grids();
+        break;
+
+    case 'saved':
+        if (isset($_SESSION['username'])) {
+        if (isset($_GET['gridId'])) {
+            $controller = new GridController();
+            $controller->show_saved_grid($_GET['gridId']);
+        } else {
+            $controller = new GridController();
+            $controller->show_saved_grids();
+        }
+    } else {
+        $controller = new UserController();
+        $controller->afficher_login();
+    }
+
         break;
 
     case 'create':
@@ -88,7 +133,7 @@ switch ($action) {
         break;
 }
 
-
+}
 
 
 

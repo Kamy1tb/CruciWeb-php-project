@@ -1,5 +1,8 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT']. '/cruciweb/app/Models/UserModel.php';
+namespace App\Controllers;
+
+use App\Config\Database;
+use App\Models\UserModel;
 
 class UserController {
     private $userModel;

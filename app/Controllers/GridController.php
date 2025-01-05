@@ -1,5 +1,8 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT']. '/cruciweb/app/Models/GridModel.php';
+namespace App\Controllers;
+
+use App\Config\Database;
+use App\Models\GridModel;
 
 class GridController {
     private $gridModel;
@@ -22,4 +25,21 @@ class GridController {
         }
         require_once $_SERVER['DOCUMENT_ROOT']. '/cruciweb/app/Views/board.php';
     }
+    public function show_saved_grids() {
+        $username = $_SESSION['username'];
+        $grids = $this->gridModel->getSavedGrids($username);
+        print_r($grids);
+    }
+
+    public function show_saved_grid($gridId) {
+        $username = $_SESSION['username'];
+        $grid = $this->gridModel->getSavedGridData($username, $gridId);
+        print_r($grid);
+    }
+
+    public function show_created_grids() { 
+        $username = $_SESSION['username'];
+        $grids = $this->gridModel->getCreatedGrids($username);
+        print_r($grids);
+      }
 }

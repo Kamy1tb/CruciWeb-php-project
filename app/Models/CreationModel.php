@@ -1,6 +1,7 @@
 <?php
+namespace App\Models;
 // Assurez-vous que Database.php est bien inclus
-require_once $_SERVER['DOCUMENT_ROOT']. '/cruciweb/config/Database.php';
+use App\Config\Database;
 
 class CreationModel {
 private $db;

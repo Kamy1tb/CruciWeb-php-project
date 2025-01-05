@@ -1,21 +1,22 @@
 <?php
+namespace App\Models;
 // Assurez-vous que Database.php est bien inclus
-require_once $_SERVER['DOCUMENT_ROOT'].'/cruciweb/config/Database.php';
+use App\Config\Database;
+
+
 
 class UserModel {
     private $db;
-    private $db_admin;
     public function __construct(Database $database) {
         // Initialisation de la connexion PDO
         $this->db = $database->getPDO();
-        $this->db_admin = $database->getPDO_admin();
     }
 
     // Authentifier l'utilisateur
     public function authenticate($username, $password) {
         $stmt = $this->db->prepare("SELECT * FROM user WHERE username = :username");
         $stmt->execute(['username' => $username]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $user = $stmt->fetch(\PDO::FETCH_ASSOC);
 
         // Vérifier le mot de passe avec password_verify pour une sécurité accrue
         if ($user && password_verify($password, $user['password'])) {
@@ -24,17 +25,6 @@ class UserModel {
         return false; // Identifiants incorrects
     }
 
-    public function authenticate_admin($username, $password) {
-        $stmt = $this->db_admin->prepare("SELECT * FROM admin WHERE username = :username");
-        $stmt->execute(['username' => $username]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Vérifier le mot de passe avec password_verify pour une sécurité accrue
-        if ($user && password_verify($password, $user['password'])) {
-            return $user; // Connexion réussie
-        }
-        return false; // Identifiants incorrects
-    }
 
     // Créer un nouvel utilisateur
     public function createUser($username,$fullname, $password, $email) {
@@ -42,7 +32,7 @@ class UserModel {
         $stmt = $this->db->prepare("SELECT * FROM user WHERE username = :username");
         $stmt->execute(['username' => $username]);
 
-        if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        if ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
             http_response_code(400); // Bad Request
             echo json_encode(['error' => 'Cet utilisateur existe déjà.']);
             exit; 
@@ -61,17 +51,13 @@ class UserModel {
         
     }
 
-    public function deleteUser($username) {
-        $stmt = $this->db_admin->prepare("DELETE FROM user WHERE username = :username");
-        $stmt->execute(['username' => $username]);
-        return "Utilisateur supprimé avec succès.";
-    }
+    
 
 
 
     public function getAllUsers() {
         $stmt = $this->db->query("SELECT * FROM user");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
 
