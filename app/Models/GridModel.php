@@ -30,6 +30,36 @@ public function getAllGrids() {
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
+public function saveGrid($id_grille,$id_user,$solution) {
+    $solution_json = json_encode($solution);
+    try {
+        // Vérifiez les valeurs avant l'exécution
+        print_r($id_grille);  // Affichez la valeur de $id_grille
+        print_r($id_user);    // Affichez la valeur de $id_user
+        print_r($solution_json);  // Affichez la valeur de $solution_json
+        
+        // Préparez la requête SQL avec les paramètres liés
+        $stmt = $this->db->prepare("
+            INSERT INTO sauvegarde (id_grille, id_user, solution) 
+            VALUES (:id_grille, :id_user, :solution_json) 
+            ON DUPLICATE KEY UPDATE solution = :solution_json;
+        ");
+    
+        // Exécution avec les valeurs liées
+        $stmt->execute([
+            ':id_grille' => $id_grille, 
+            ':id_user' => $id_user, 
+            ':solution_json' => $solution_json
+        ]);
+    
+        echo "L'opération a réussi.";
+    } catch (\PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
+    }
+    
+    return "Grille sauvegardée avec succès.";
+}
+
 public function getSavedGrids($username) {
     $sql = "SELECT g.id_grille,g.id_user,g.difficulté,g.nom,g.description,g.estimated_time,g.date,s.solution 
         FROM sauvegarde s 

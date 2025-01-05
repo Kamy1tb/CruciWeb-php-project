@@ -91,12 +91,26 @@ switch ($action) {
 
     case 'saved':
         if (isset($_SESSION['username'])) {
-        if (isset($_GET['gridId'])) {
+            
+        if (isset($_POST['gridData'])) {
+            
+            $controller = new GridController();
+            $gridId = $_POST['gridId'];
+            $gridData = $_POST['gridData'];
+            $controller->saveGrid($gridId, $gridData);
+            break;
+        } else {
+            if (isset($_GET['gridId'])) {
             $controller = new GridController();
             $controller->show_saved_grid($_GET['gridId']);
-        } else {
-            $controller = new GridController();
-            $controller->show_saved_grids();
+            break;
+
+            } else{
+                $controller = new GridController();
+                $controller->show_saved_grids();
+                break;
+            }
+            
         }
     } else {
         $controller = new UserController();
@@ -110,7 +124,7 @@ switch ($action) {
 
             if(isset($_POST['gridData'])) {
                 // Décoder le JSON en tableau associatif
-                
+                print_r($_POST['gridData']);
                 $controller = new CreationController();
                 $controller->create();
                 break;
