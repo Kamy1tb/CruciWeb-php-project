@@ -8,7 +8,7 @@
     <title>Page Non Trouvée</title>
 </head>
 <body>
-    <?php include ($_SERVER['DOCUMENT_ROOT'].'/cruciweb/app/Views/layout/navbar.php'); ?>
+    <?php include ($_SERVER['DOCUMENT_ROOT'].'/app/Views/layout/navbar.php'); ?>
     <div class="not-found-container">
         <h1>404</h1>
         <p>Page Non Trouvée</p>

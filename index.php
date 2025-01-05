@@ -129,7 +129,7 @@ switch ($action) {
 
 
         default:
-        require ($_SERVER['DOCUMENT_ROOT'].'/cruciweb/app/Views/404.php');
+        require ($_SERVER['DOCUMENT_ROOT'].'/app/Views/404.php');
         break;
 }
 

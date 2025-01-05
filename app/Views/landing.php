@@ -8,7 +8,7 @@
     <title>Accueil</title>
 </head>
 <body>
-    <?php include($_SERVER['DOCUMENT_ROOT'] . '/cruciweb/app/Views/layout/navbar.php');
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/app/Views/layout/navbar.php');
  ?>
     <div class="landing-container">
         <div class="left-section">

@@ -14,16 +14,16 @@ class GridController {
 
     public function index() {
         $grids = $this->gridModel->getAllGrids();
-        require_once $_SERVER['DOCUMENT_ROOT']. '/cruciweb/app/Views/games.php';
+        require_once $_SERVER['DOCUMENT_ROOT']. '/app/Views/games.php';
     }
     public function show_grid() {
         $gridId = $_GET['gridId'];
         $grid = $this->gridModel->getGridById($gridId);
         if ($grid === "grid not found") {
-            require_once $_SERVER['DOCUMENT_ROOT']. '/cruciweb/app/Views/404.php';
+            require_once $_SERVER['DOCUMENT_ROOT']. '/app/Views/404.php';
             return;
         }
-        require_once $_SERVER['DOCUMENT_ROOT']. '/cruciweb/app/Views/board.php';
+        require_once $_SERVER['DOCUMENT_ROOT']. '/app/Views/board.php';
     }
     public function show_saved_grids() {
         $username = $_SESSION['username'];
