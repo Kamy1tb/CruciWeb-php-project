@@ -3,11 +3,44 @@ document.addEventListener("DOMContentLoaded", () => {
   const paginationContainer = document.getElementById("pagination-container");
   const sortBySelect = document.getElementById("sort-by");
   const sortOrderSelect = document.getElementById("sort-order");
+
+  const allFilter = document.getElementById("all-filter");
+  const userFilter = document.getElementById("user-filter");
+  const progressFilter = document.getElementById("progress-filter");
+
   let currentPage = 1;
   const itemsPerPage = 6;
-  let grids = phpData;
 
-  console.log("Grids:", grids);
+  let grids = phpData;
+  let filteredGrids = phpData;
+
+  allFilter.addEventListener("click", () => {
+    filteredGrids = grids;
+    currentPage = 1;
+    displayGrids();
+  });
+
+  userFilter.addEventListener("click", () => {
+    if (username) {
+      filteredGrids = grids.filter((grid) => grid.id_user === username);
+    } else {
+      filteredGrids = grids; // Fallback if username is not defined
+    }
+    currentPage = 1;
+    displayGrids();
+  });
+
+  progressFilter.addEventListener("click", () => {
+    if (username) {
+      filteredGrids = grids.filter((grid) => {
+        return grids_saved.some((saved) => saved.id_grille === grid.id_grille);
+      });
+    } else {
+      filteredGrids = grids; // Fallback if username is not defined
+    }
+    currentPage = 1;
+    displayGrids();
+  });
 
   sortBySelect.addEventListener("change", () => {
     currentPage = 1;
@@ -19,15 +52,11 @@ document.addEventListener("DOMContentLoaded", () => {
     displayGrids();
   });
 
-  function showTab() {}
-
   function displayGrids() {
     const sortBy = sortBySelect.value;
     const sortOrder = sortOrderSelect.value;
 
-    // Filter grids
-    // Sort grids
-    grids.sort((a, b) => {
+    filteredGrids.sort((a, b) => {
       let comparison = 0;
 
       if (sortBy === "creation_date") {
@@ -44,7 +73,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Paginate grids
     const startIndex = (currentPage - 1) * itemsPerPage;
-    const paginatedGrids = grids.slice(startIndex, startIndex + itemsPerPage);
+    const paginatedGrids = filteredGrids.slice(
+      startIndex,
+      startIndex + itemsPerPage
+    );
 
     // Display grids
     cardsContainer.innerHTML = "";
@@ -75,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
       cardsContainer.appendChild(card);
     });
 
-    setupPagination(Math.ceil(grids.length / itemsPerPage));
+    setupPagination(Math.ceil(filteredGrids.length / itemsPerPage));
 
     document.querySelectorAll(".play-button").forEach((button) => {
       button.addEventListener("click", function (event) {
@@ -104,9 +136,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Initial display
-  displayGrids();
-
   function handlePlayButtonClick(gridId) {
     $.ajax({
       url: "index.php?action=grids",
@@ -124,4 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     });
   }
+
+  // Call displayGrids to display the grids initially
+  displayGrids();
 });

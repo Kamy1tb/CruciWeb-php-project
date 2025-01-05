@@ -25,12 +25,24 @@ class GridController {
     public function show_grid() {
         $gridId = $_GET['gridId'];
         $grid = $this->gridModel->getGridById($gridId);
+    
+        // Check if the grid exists
         if ($grid === "grid not found") {
-            require_once $_SERVER['DOCUMENT_ROOT']. '/app/Views/404.php';
+            require_once $_SERVER['DOCUMENT_ROOT'] . '/app/Views/404.php';
             return;
         }
-        require_once $_SERVER['DOCUMENT_ROOT']. '/app/Views/board.php';
+    
+        // Check if the user is logged in and retrieve progress if available
+        $progress = null; // Default value if no progress exists
+        if (isset($_SESSION['username'])) {
+            $username = $_SESSION['username'];
+            $progress = $this->gridModel->getUserGridProgress($username, $gridId); // Method to fetch progress
+        }
+    
+        // Pass both the grid and progress to the view
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/app/Views/board.php';
     }
+    
     public function show_saved_grids() {
         $username = $_SESSION['username'];
         $grids = $this->gridModel->getSavedGrids($username);

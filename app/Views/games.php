@@ -13,10 +13,10 @@
     <div class="games-container">
         <h1>Jeux Créés</h1>
         <div class="tabs">
-            <button class="tab-button" onclick="showTab('all')">Toutes les parties</button>
-            <button class="tab-button" onclick="showTab('user')">Parties créées par l'utilisateur</button>
+            <button class="tab-button" id="all-filter">Toutes les parties</button>
             <?php if (isset($_SESSION['username'])): ?>
-                <button class="tab-button" onclick="showTab('saved')">Parties en cours</button>
+                <button class="tab-button" id="user-filter">Parties créées par l'utilisateur</button>
+                <button class="tab-button" id="progress-filter">Parties en cours</button>
             <?php endif; ?>
         </div>
         <div class="tab-content">
@@ -44,6 +44,8 @@
     </div>
     <script>
         const phpData = <?php echo json_encode($grids); ?>;
+        const username = <?php echo isset($_SESSION['username']) ? json_encode($_SESSION['username']) : 'null'; ?>;
+        const grids_saved = <?php echo isset($grids_saved) ? json_encode($grids_saved) : 'null'; ?>;
     </script>
     <script src="public/js/games.js"></script>
 </body>

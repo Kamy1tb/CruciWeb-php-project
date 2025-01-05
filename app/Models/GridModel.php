@@ -69,6 +69,17 @@ public function getSavedGridsID($username) {
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
+public function getUserGridProgress($username, $gridId) {
+    $sql = "SELECT solution FROM sauvegarde WHERE id_user = :username AND id_grille = :grid_id";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute(['username' => $username, 'grid_id' => $gridId]);
+
+    // Directly return the result as an array like in getAllGrids
+    return $stmt->fetch(\PDO::FETCH_ASSOC); // This will return an associative array with the 'solution' key
+}
+
+
+
 public function getSavedGrids($username) {
     $sql = "SELECT g.id_grille,g.id_user,g.difficulté,g.nom,g.description,g.estimated_time,g.date,s.solution 
         FROM sauvegarde s 

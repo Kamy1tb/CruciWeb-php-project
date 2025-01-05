@@ -55,13 +55,24 @@
                 </div>
             </div>
             <div id="session-controls">
-                <button id="save-solution">Sauvgarder</button>
+                <?php if (isset($_SESSION['username'])): ?>
+                    <button id="save-solution">Sauvgarder</button>
+                <?php endif; ?>
                 <button id="submit-solution">Valider</button>
             </div></div>
            
     </div>
+    <div id="congratulations-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Félicitations!</h2>
+            <p>La solution est correcte !</p>
+        </div>
+    </div>
     <script>
         const grid = <?php echo json_encode($grid); ?>;
+        const userProgress = <?= json_encode($progress) ?>;
+
     </script>
     <script src="public/js/board.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
