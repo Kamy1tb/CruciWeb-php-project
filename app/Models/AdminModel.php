@@ -12,6 +12,10 @@ class AdminModel {
         $stmt = $this->db_admin->query("SELECT * FROM user");
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
+    public function getAllGrids(){
+        $stmt = $this->db_admin->query("SELECT * FROM grille");
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
     public function deleteUser($username) {
         $stmt = $this->db_admin->prepare("DELETE FROM user WHERE username = :username");
         $stmt->execute(['username' => $username]);

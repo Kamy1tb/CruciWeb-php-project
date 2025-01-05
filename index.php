@@ -41,7 +41,11 @@ if (isset($_SESSION["username"]) && $_SESSION['username'] == 'admin_cruciweb') {
             $controller = new AdminController();
             $controller->delete_user($_GET['username']);
             break;
+        default:
+            require ($_SERVER['DOCUMENT_ROOT'].'/app/Views/404.php');
+            break;
     }
+    
 
 }
 else{
