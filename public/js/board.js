@@ -427,8 +427,8 @@ document.getElementById("save-solution").addEventListener("click", function () {
   };
 
   $.ajax({
-    url: "index.php?action=saved",
-    method: "POST",
+    url: 'index.php?action=saved',
+    method: 'POST',
     data: finalObject,
 
     success: function (response) {
@@ -437,6 +437,7 @@ document.getElementById("save-solution").addEventListener("click", function () {
       return response;
     },
     error: function (xhr, status, error) {
+      console.log("error:", error);
       console.log("Status:", status);
       console.log("Requête renvoyée :", xhr.responseText);
     },

@@ -42,4 +42,10 @@ class GridController {
         $grids = $this->gridModel->getCreatedGrids($username);
         print_r($grids);
       }
+    
+    public function saveGrid($gridId,$gridData) {
+        $username = $_SESSION['username'];
+        $gridId = $this->gridModel->saveGrid($gridId, $username,$gridData);
+        print_r("Grid saved with id: ".$gridId);
+    }
 }
