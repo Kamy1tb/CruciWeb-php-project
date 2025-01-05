@@ -194,7 +194,8 @@ button:hover {
 
 .step3-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 5rem;
 }
 
 #grid-container-step3 {

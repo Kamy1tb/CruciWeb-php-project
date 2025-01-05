@@ -10,35 +10,58 @@
 <body>
     <?php include 'layout/navbar.php'; ?>
     <div class="board-container container">
-        <h1>Jeu de Mots Croisés</h1>
+        <div class="info-container">
+        <?php 
+            echo '
+            <div class="general-info">
+                <h2>'.$grid['nom'].'</h2>
+                <p class="difficulty">
+                <span class="difficulty-circle '.$grid['difficulté'].'"></span>'.$grid['difficulté'].'
+            </p>
+             
+            <p class="estimated-time">Temps estimé: '.$grid['estimated_time'].' mins</p>
+            </div>
+            <p class="creator">Par : '.$grid['id_user'].'</p>
+            <p class="description">'.$grid['description'].'</p>';
+        ?>  
+        </div>
         <div id="app">
-            <div id="grid-wrapper">
-                <div id="grid-container">
-                    <!-- La grille des mots croisés sera générée ici -->
+            <div id="left-container">
+                <div id="grid-wrapper">
+                    <div id="grid-container">
+                        <!-- La grille des mots croisés sera générée ici -->
+                    </div>
+                </div>
+                <div id="controls">
+                    <button id="horizontal">Horizontal</button> 
+                    <button id="vertical">Vertical</button>
                 </div>
             </div>
-            <div id="controls">
-                <button id="toggle-direction">Changer la direction</button>
-                <button id="submit-solution">Soumettre la solution</button>
-                <button id="clear-cells">Effacer toutes les cases</button>
-            </div></div>
             
-            <div id="clues-container">
-              <div>
-                <h2>Indices Horizontaux</h2>
-                <div id="horizontal-clues">
-                    <!-- Les indices horizontaux seront affichés ici -->
+            <div id="right-container"> 
+                <div id="clues-container">
+                <div>
+                    <h2>Horizontalement</h2>
+                    <div id="horizontal-clues">
+                        <!-- Les indices horizontaux seront affichés ici -->
+                    </div>
                 </div>
-              </div>
-              <div>
-              <h2>Indices Verticaux</h2>
-                <div id="vertical-clues">
-                    <!-- Les indices verticaux seront affichés ici -->
+                <div>
+                <h2>Verticalement</h2>
+                    <div id="vertical-clues">
+                        <!-- Les indices verticaux seront affichés ici -->
+                    </div>
                 </div>
-              </div>
-                
             </div>
+            <div id="session-controls">
+                <button id="submit-solution">Valider</button>
+                <button id="save-solution">Sauvgarder</button>
+            </div></div>
+           
     </div>
+    <script>
+        const grid = <?php echo json_encode($grid); ?>;
+    </script>
     <script src="../public/js/board.js"></script>
 </body>
 </html>

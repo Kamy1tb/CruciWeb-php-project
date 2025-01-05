@@ -20,6 +20,6 @@ class GridController {
             require_once __DIR__ . '/../Views/404.php';
             return;
         }
-        print_r($grid);
+        require_once __DIR__ . '/../Views/board.php';
     }
 }

@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const sortBySelect = document.getElementById("sort-by");
   const sortOrderSelect = document.getElementById("sort-order");
   let currentPage = 1;
-  const itemsPerPage = 3;
+  const itemsPerPage = 6;
   let grids = phpData;
 
   sortBySelect.addEventListener("change", () => {
@@ -17,22 +17,16 @@ document.addEventListener("DOMContentLoaded", () => {
     displayGrids();
   });
 
-  document.querySelectorAll('.play-button').forEach(button => {
-    button.addEventListener('click', function(event) {;
-        const gridId = button.getAttribute("data-grid-id");
-        handlePlayButtonClick(gridId);
-    });
-  });
+  function showTab() {}
 
   function displayGrids() {
-
-    
     const sortBy = sortBySelect.value;
     const sortOrder = sortOrderSelect.value;
     console.log(
       `Displaying grids sorted by ${sortBy} in ${sortOrder} order, page ${currentPage}`
     );
 
+    // Filter grids
     // Sort grids
     grids.sort((a, b) => {
       let comparison = 0;
@@ -79,17 +73,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p class="creation-date">Date de création: ${new Date(
                   grid.date
                 ).toLocaleDateString()}</p>
-                <button type="button" data-grid-id="${grid.id_grille}" class="play-button">Jouer</button>
+                <button class="play-button" data-grid-id="${
+                  grid.id_grille
+                }">Jouer</button>
             `;
       cardsContainer.appendChild(card);
     });
 
     setupPagination(Math.ceil(grids.length / itemsPerPage));
 
-    document.querySelectorAll('.play-button').forEach(button => {
-      button.addEventListener('click', function(event) {;
-          const gridId = button.getAttribute("data-grid-id");
-          handlePlayButtonClick(gridId);
+    document.querySelectorAll(".play-button").forEach((button) => {
+      button.addEventListener("click", function (event) {
+        const gridId = button.getAttribute("data-grid-id");
+        handlePlayButtonClick(gridId);
       });
     });
   }
@@ -102,6 +98,8 @@ document.addEventListener("DOMContentLoaded", () => {
       button.classList.add("pagination-button");
       if (i === currentPage) {
         button.classList.add("active");
+        button.style.backgroundColor = "#ff595a";
+        button.style.color = "white";
       }
       button.addEventListener("click", () => {
         currentPage = i;
@@ -111,27 +109,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Initial display
   displayGrids();
 
-  
-  
-  
   function handlePlayButtonClick(gridId) {
     console.log(`Play button clicked for grid ${gridId}`);
     $.ajax({
-      url: '../public/index.php?action=grids',
-      method: 'GET',
+      url: "../public/index.php?action=grids",
+      method: "GET",
       data: gridId,
 
       success: function (response) {
-         console.log(response);
-         window.location.href = '../public/index.php?action=grids&gridId=' + gridId;
-         return response;
+        console.log(response);
+        window.location.href =
+          "../public/index.php?action=grids&gridId=" + gridId;
+        return response;
       },
       error: function (xhr, status, error) {
         console.log("Status:", status);
         console.log("Requête renvoyée :", xhr.responseText);
-      }
-  });
+      },
+    });
   }
-}); 
+});

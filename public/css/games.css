@@ -80,3 +80,56 @@ body {
 .game-card button:hover {
   background-color: #e04e4f;
 }
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.tab-button {
+  padding: 10px 5rem;
+  background-color: #ff595a;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-family: inherit;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+select {
+  width: 19rem;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  font-family: inherit;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  gap: 3rem;
+}
+
+.tab-content {
+  padding: 2rem;
+  border-radius: 20px;
+  background-color: #91b3fa;
+  margin: 0 5rem;
+}
+.paggination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.pagination-button {
+  font-family: inherit;
+  height: 2.4rem;
+  width: 2.4rem;
+  background-color: white;
+  margin-top: 2rem;
+  cursor: pointer;
+  border: none;
+}
