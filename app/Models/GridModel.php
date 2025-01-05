@@ -60,6 +60,15 @@ public function saveGrid($id_grille,$id_user,$solution) {
     return "Grille sauvegardée avec succès.";
 }
 
+public function getSavedGridsID($username) {
+    $sql = "SELECT id_grille
+        FROM sauvegarde s 
+        WHERE s.id_user = :username";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute(['username' => $username]);
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+}
+
 public function getSavedGrids($username) {
     $sql = "SELECT g.id_grille,g.id_user,g.difficulté,g.nom,g.description,g.estimated_time,g.date,s.solution 
         FROM sauvegarde s 

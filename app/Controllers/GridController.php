@@ -14,7 +14,13 @@ class GridController {
 
     public function index() {
         $grids = $this->gridModel->getAllGrids();
+        if (isset($_SESSION['username'])) {
+        $grids_saved = $this->gridModel->getSavedGridsId($_SESSION['username']);
         require_once $_SERVER['DOCUMENT_ROOT']. '/app/Views/games.php';
+        } else {
+            require_once $_SERVER['DOCUMENT_ROOT']. '/app/Views/games.php';
+        }
+        
     }
     public function show_grid() {
         $gridId = $_GET['gridId'];
