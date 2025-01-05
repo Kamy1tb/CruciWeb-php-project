@@ -14,8 +14,8 @@ body {
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 34%; /* At least half the screen */
-  max-width: 600px; /* Optional: limit the maximum width */
+  width: 34%;
+  max-width: 600px;
   text-align: center;
 }
 
@@ -34,7 +34,7 @@ body {
   margin-bottom: 20px;
   color: #666;
   font-size: 1.1rem;
-  font-weight: 300; /* Thinner font weight */
+  font-weight: 300;
 }
 
 .signup-container .form-group {
@@ -44,47 +44,47 @@ body {
 }
 
 .signup-container .form-group input {
-  flex: 1; /* Ensure inputs take equal space */
+  flex: 1;
 }
 
 .signup-container input {
   width: 100%;
-  padding: 15px; /* Increased height */
+  padding: 15px;
   margin-bottom: 10px;
-  border: 2px solid #ff595a; /* Border color */
-  border-radius: 10px; /* More rounded borders */
-  box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+  border: 2px solid #ff595a;
+  border-radius: 10px;
+  box-sizing: border-box;
   font-size: 1;
-  font-weight: 300; /* Thinner font weight */
+  font-weight: 300;
 }
 
 .signup-container input::placeholder {
-  color: #a1a1a1; /* Placeholder text color */
+  color: #a1a1a1;
 }
 
 .signup-container input:focus {
-  outline: none; /* Remove outline on focus */
+  outline: none;
 }
 
 .signup-container button {
   margin-top: 10px;
-  width: 30%; /* Less width */
-  padding: 15px; /* Increased height */
-  background-color: #ff595a; /* Button background color */
-  border: 2px solid #ff595a; /* Button border color */
-  border-radius: 20px; /* More rounded borders */
+  width: 30%;
+  padding: 15px;
+  background-color: #ff595a;
+  border: 2px solid #ff595a;
+  border-radius: 20px;
   color: #fff;
   font-size: 16px;
   cursor: pointer;
-  font-weight: 300; /* Thinner font weight */
+  font-weight: 300;
 }
 
 .signup-container button:hover {
-  background-color: #e04e4f; /* Slightly darker shade for hover */
+  background-color: #e04e4f;
 }
 
 #error-message {
   color: red;
   margin-top: 10px;
-  font-weight: 300; /* Thinner font weight */
+  font-weight: 300;
 }

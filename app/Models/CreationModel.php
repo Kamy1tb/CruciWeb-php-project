@@ -1,18 +1,15 @@
 <?php
 namespace App\Models;
-// Assurez-vous que Database.php est bien inclus
 use App\Config\Database;
 
 class CreationModel {
 private $db;
 
 public function __construct(Database $database) {
-    // Initialisation de la connexion PDO
     $this->db = $database->getPDO();
 }
 
 public function createGrid($id_user, $difficulté, $nom, $description, $estimated_time, $width, $height, $case_noire, $clues,$solutions,$date) {
-    // Insertion dans la base de données
     $stmt = $this->db->prepare("INSERT INTO grille (id_user, difficulté, nom, description, estimated_time, width, height, case_noire, clues, solutions, date) VALUES (:id_user, :difficulte, :nom, :description, :estimated_time, :width, :height, :case_noire, :clues, :solutions, :date)");
     $case_noire_json = json_encode($case_noire);
     $clues_json = json_encode($clues);
@@ -36,11 +33,7 @@ public function createGrid($id_user, $difficulté, $nom, $description, $estimate
         ':solutions' => $hashed_solutions,
         ':date' => $date
     ]);
-    
-
     return "Grille créée avec succès.";
-
 }
-
 }
 ?>

@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (username) {
       filteredGrids = grids.filter((grid) => grid.id_user === username);
     } else {
-      filteredGrids = grids; // Fallback if username is not defined
+      filteredGrids = grids;
     }
     currentPage = 1;
     displayGrids();
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return grids_saved.some((saved) => saved.id_grille === grid.id_grille);
       });
     } else {
-      filteredGrids = grids; // Fallback if username is not defined
+      filteredGrids = grids;
     }
     currentPage = 1;
     displayGrids();
@@ -71,14 +71,12 @@ document.addEventListener("DOMContentLoaded", () => {
       return sortOrder === "asc" ? comparison : -comparison;
     });
 
-    // Paginate grids
     const startIndex = (currentPage - 1) * itemsPerPage;
     const paginatedGrids = filteredGrids.slice(
       startIndex,
       startIndex + itemsPerPage
     );
 
-    // Display grids
     cardsContainer.innerHTML = "";
     paginatedGrids.forEach((grid) => {
       const card = document.createElement("div");
@@ -154,6 +152,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Call displayGrids to display the grids initially
   displayGrids();
 });

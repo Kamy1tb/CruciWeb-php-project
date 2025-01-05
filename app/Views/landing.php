@@ -16,7 +16,6 @@
             <p>Découvrez une activité classique et captivante qui stimule votre esprit tout en vous amusant. Complétez les grilles en trouvant les mots qui correspondent aux indices donnés.</p>
             
             <?php
-                // Vérifier si 'username' est dans $_POST et non vide
                 if (!isset($_SESSION['username'])) {
                     echo '<div class="buttons">
                         <a href="index.php?action=signup" class="button create-account-button">

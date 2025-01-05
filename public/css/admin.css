@@ -12,7 +12,7 @@ body {
 h2 {
   margin: 1rem;
 }
-/* General styling for tables */
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -36,7 +36,6 @@ th {
   color: white;
 }
 
-/* Styling for links */
 a {
   text-decoration: none;
   color: #007bff;

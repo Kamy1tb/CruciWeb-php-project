@@ -234,7 +234,6 @@ button:hover {
   border-radius: 5px;
 }
 
-/* Add this CSS to style the clue groups */
 .clue-group {
   display: flex;
   align-items: center;

@@ -128,9 +128,8 @@ function generateGrid() {
   const height = document.getElementById("height").value;
   const width = document.getElementById("width").value;
   const gridContainer = document.getElementById("grid-container");
-  gridContainer.innerHTML = ""; // Clear previous grid
+  gridContainer.innerHTML = "";
 
-  // Add column headers
   const headerRow = document.createElement("div");
   headerRow.classList.add("grid-row");
   for (let col = 0; col < parseInt(width, 10) + 1; col++) {
@@ -145,7 +144,6 @@ function generateGrid() {
     const row = document.createElement("div");
     row.classList.add("grid-row");
 
-    // Add row header
     const headerCell = document.createElement("div");
     headerCell.classList.add("header-cell");
     headerCell.textContent = i + 1;
@@ -166,7 +164,7 @@ function generateGrid() {
 function prepareGridForStep3() {
   const gridContainerStep3 = document.getElementById("grid-container-step3");
   const gridContainer = document.getElementById("grid-container");
-  gridContainerStep3.innerHTML = gridContainer.innerHTML; // Copy grid from step 2
+  gridContainerStep3.innerHTML = gridContainer.innerHTML;
 
   document
     .querySelectorAll("#grid-container-step3 .grid-cell")
@@ -176,10 +174,10 @@ function prepareGridForStep3() {
         cell.addEventListener("input", (e) => {
           let inputChar = e.data ? e.data.toUpperCase() : "";
           if (/^[A-Z]$/.test(inputChar)) {
-            cell.textContent = inputChar; // Convert the input to uppercase
+            cell.textContent = inputChar;
             moveToNextCell(index);
           } else {
-            cell.textContent = ""; // Clear the cell if the input is not valid
+            cell.textContent = "";
           }
         });
       }
@@ -215,12 +213,10 @@ function generateClues() {
   let clueCount = 0;
   let wordLength = 0;
 
-  // Add title for horizontal clues
   const horizontalTitle = document.createElement("h3");
   horizontalTitle.textContent = "Horizontalement:";
   cluesForm.appendChild(horizontalTitle);
 
-  // Generate horizontal clues
   for (let i = 1; i <= height; i++) {
     clueCount = 0;
     let j = 1;
@@ -255,14 +251,12 @@ function generateClues() {
     }
   }
 
-  // Add title for vertical clues
   const verticalTitle = document.createElement("h3");
   verticalTitle.textContent = "Verticalement:";
   cluesForm.appendChild(verticalTitle);
 
   clueCount = 0;
   wordLength = 0;
-  // Generate vertical clues
   for (let j = 1; j <= width; j++) {
     clueCount = 0;
     let i = 1;
@@ -303,7 +297,6 @@ document
   .addEventListener("click", validateStep3);
 
 function validateStep3() {
-  // Check if all clue inputs are filled
   let allCluesFilled = true;
   document.querySelectorAll(".clue-group input").forEach((input) => {
     if (!input.value) {
@@ -311,7 +304,6 @@ function validateStep3() {
     }
   });
 
-  // Check if all grid cells are filled
   let allCellsFilled = true;
   document
     .querySelectorAll("#grid-container-step3 .grid-cell")
@@ -340,7 +332,6 @@ function generateFinalObject() {
 
   const solutions = {};
 
-  // Generate horizontal solutions
   for (let i = 1; i <= gridData.height; i++) {
     let clueCount = 0;
     let j = 1;
@@ -375,7 +366,6 @@ function generateFinalObject() {
     }
   }
 
-  // Generate vertical solutions
   for (let j = 1; j <= gridData.width; j++) {
     let clueCount = 0;
     let i = 1;

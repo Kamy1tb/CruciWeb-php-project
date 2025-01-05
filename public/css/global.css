@@ -4,7 +4,6 @@
   font-family: "DM Sans", sans-serif;
 }
 
-/* Add styles for the navigation bar */
 nav {
   background-color: #fff;
   display: flex;
@@ -17,7 +16,7 @@ nav {
 nav .nav-left {
   display: flex;
   align-items: center;
-  flex-grow: 2; /* Increase the flex-grow value to push the center section to the right */
+  flex-grow: 2;
 }
 
 nav .logo {
@@ -25,7 +24,7 @@ nav .logo {
 }
 
 nav .nav-center {
-  flex-grow: 1; /* Center section with less flex-grow value */
+  flex-grow: 1;
   display: flex;
   justify-content: center;
 }
