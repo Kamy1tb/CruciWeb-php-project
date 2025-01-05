@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const itemsPerPage = 6;
   let grids = phpData;
 
+  console.log("Grids:", grids);
+
   sortBySelect.addEventListener("change", () => {
     currentPage = 1;
     displayGrids();
@@ -22,9 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function displayGrids() {
     const sortBy = sortBySelect.value;
     const sortOrder = sortOrderSelect.value;
-    console.log(
-      `Displaying grids sorted by ${sortBy} in ${sortOrder} order, page ${currentPage}`
-    );
 
     // Filter grids
     // Sort grids
@@ -43,13 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return sortOrder === "asc" ? comparison : -comparison;
     });
 
-    console.log("Sorted grids:", grids);
-
     // Paginate grids
     const startIndex = (currentPage - 1) * itemsPerPage;
     const paginatedGrids = grids.slice(startIndex, startIndex + itemsPerPage);
-
-    console.log("Paginated grids:", paginatedGrids);
 
     // Display grids
     cardsContainer.innerHTML = "";
@@ -113,7 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
   displayGrids();
 
   function handlePlayButtonClick(gridId) {
-    console.log(`Play button clicked for grid ${gridId}`);
     $.ajax({
       url: "index.php?action=grids",
       method: "GET",
@@ -121,8 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       success: function (response) {
         console.log(response);
-        window.location.href =
-          "index.php?action=grids&gridId=" + gridId;
+        window.location.href = "index.php?action=grids&gridId=" + gridId;
         return response;
       },
       error: function (xhr, status, error) {

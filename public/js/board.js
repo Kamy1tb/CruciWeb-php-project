@@ -1,16 +1,14 @@
+const alphabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
 document.addEventListener("DOMContentLoaded", () => {
   const gridContainer = document.getElementById("grid-container");
-  const horizontal = document.getElementById("horizontal");
-  const vertical = document.getElementById("vertical");
   const horizontalCluesContainer = document.getElementById("horizontal-clues");
   const verticalCluesContainer = document.getElementById("vertical-clues");
 
   let isHorizontal = true;
   let currentFocusedCell = null;
-  const alphabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   case_noire = JSON.parse(grid.case_noire);
   clues = JSON.parse(grid.clues);
-  console.log(clues);
 
   const horizontalGroups = {};
   const verticalGroups = {};
@@ -196,12 +194,162 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   }
+
+  const horizontal = document.getElementById("horizontal");
+  const vertical = document.getElementById("vertical");
+
   horizontal.addEventListener("click", () => {
     isHorizontal = true;
+    horizontal.classList.add("active");
+    vertical.classList.remove("active");
     currentFocusedCell.focus();
   });
+
   vertical.addEventListener("click", () => {
     isHorizontal = false;
+    vertical.classList.add("active");
+    horizontal.classList.remove("active");
     currentFocusedCell.focus();
   });
 });
+
+function isBlackSquare(x, y, blackSquares) {
+  return blackSquares.some((square) => square.x == x && square.y == y);
+}
+
+document
+  .getElementById("submit-solution")
+  .addEventListener("click", function () {
+    const answers = JSON.parse(grid.solutions);
+    const blackSquares = JSON.parse(grid.case_noire);
+
+    console.log(answers);
+    const gridContainer = document.getElementById("grid-container");
+    const rows = gridContainer.querySelectorAll(".grid-row");
+    let allCellsFilled = true;
+
+    // Check if all cells are filled
+    rows.forEach((row) => {
+      const cells = row.querySelectorAll(".grid-cell");
+      cells.forEach((cell) => {
+        if (
+          !cell.classList.contains("highlighted") &&
+          !cell.textContent.trim()
+        ) {
+          allCellsFilled = false;
+        }
+      });
+    });
+
+    if (!allCellsFilled) {
+      alert("Veuillez remplir toutes les cellules de la grille.");
+      return;
+    }
+
+    const solutions = {};
+
+    // Generate horizontal solutions
+    for (let i = 1; i <= grid.height; i++) {
+      let clueCount = 0;
+      let j = 1;
+      while (j <= grid.width) {
+        while (isBlackSquare(j, i, blackSquares) && j <= grid.width) {
+          ++j;
+        }
+        if (j === grid.width) break;
+        let wordLength = 0;
+        let word = "";
+        while (
+          j + wordLength <= grid.width &&
+          !isBlackSquare(j + wordLength, i, blackSquares)
+        ) {
+          const cell = document.querySelector(
+            `#grid-container .grid-row:nth-child(${
+              i + 1
+            }) .grid-cell:nth-child(${j + wordLength + 1})`
+          );
+          word += cell.textContent;
+          wordLength++;
+        }
+        if (wordLength > 1) {
+          clueCount++;
+          solutions[`${i}.${clueCount}`] = word;
+          j += wordLength;
+        }
+        ++j;
+      }
+    }
+
+    // Generate vertical solutions
+    for (let j = 1; j <= grid.width; j++) {
+      let clueCount = 0;
+      let i = 1;
+      while (i <= grid.height) {
+        while (isBlackSquare(j, i, blackSquares) && i <= grid.height) {
+          ++i;
+        }
+        if (i === grid.height) break;
+        let wordLength = 0;
+        let word = "";
+        while (
+          i + wordLength <= grid.height &&
+          !isBlackSquare(j, i + wordLength, blackSquares)
+        ) {
+          const cell = document.querySelector(
+            `#grid-container .grid-row:nth-child(${
+              i + wordLength + 1
+            }) .grid-cell:nth-child(${j + 1})`
+          );
+          word += cell.textContent;
+          wordLength++;
+        }
+        if (wordLength > 1) {
+          clueCount++;
+          solutions[`${alphabet[j]}.${clueCount}`] = word;
+          i += wordLength;
+        }
+        ++i;
+      }
+    }
+
+    const hashSolution = async (solution) => {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(solution);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray
+        .map((byte) => byte.toString(16).padStart(2, "0"))
+        .join("");
+    };
+
+    const hashSolutions = async (solutions) => {
+      const hashedSolutions = {};
+      for (const key in solutions) {
+        hashedSolutions[key] = await hashSolution(solutions[key]);
+      }
+      console.log(hashedSolutions);
+      return hashedSolutions;
+    };
+
+    (async () => {
+      const hashedSolutions = await hashSolutions(solutions);
+
+      // Function to compare two objects
+      const areObjectsEqual = (obj1, obj2) => {
+        const keys1 = Object.keys(obj1);
+        const keys2 = Object.keys(obj2);
+
+        // Check if they have the same number of keys
+        if (keys1.length !== keys2.length) return false;
+
+        // Check if all values are equal
+        return keys1.every((key) => obj1[key] === obj2[key]);
+      };
+
+      if (areObjectsEqual(hashedSolutions, answers)) {
+        alert("La solution est correcte !");
+      } else {
+        alert("La solution est incorrecte.");
+      }
+    })();
+  });

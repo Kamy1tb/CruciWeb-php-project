@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div id="controls">
-                    <button id="horizontal">Horizontal</button> 
+                    <button id="horizontal" class="active">Horizontal</button> 
                     <button id="vertical">Vertical</button>
                 </div>
             </div>
@@ -54,8 +54,8 @@
                 </div>
             </div>
             <div id="session-controls">
-                <button id="submit-solution">Valider</button>
                 <button id="save-solution">Sauvgarder</button>
+                <button id="submit-solution">Valider</button>
             </div></div>
            
     </div>
