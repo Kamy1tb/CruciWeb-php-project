@@ -7,7 +7,7 @@ document
     const formData = {
       action: 'signup', // Ajouter l'action ici
       username: $('#username').val(),
-      fullname: 'test test',
+      fullname: $('#fullname').val(),
       password: $('#password').val(),
       email: $('#email').val(),
     };

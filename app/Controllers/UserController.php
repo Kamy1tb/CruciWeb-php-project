@@ -71,8 +71,9 @@ class UserController {
         // Récupérer les données POST
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $email = $_POST['email'];
         $fullname = $_POST['fullname'];
+        $email = $_POST['email'];
+        
 
         // Créer un nouvel utilisateur
         $this->userModel->createUser($username,$fullname, $password, $email);

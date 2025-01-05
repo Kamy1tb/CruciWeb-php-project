@@ -10,6 +10,22 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!confirmation) {
         e.preventDefault();
       }
+      else {
+        $.ajax({
+          url: this.href,
+          method: "GET",
+          success: function (response) {
+            if (response.success) {
+              window.location.href('index.php');
+            } else {
+              alert("An error occurred. Please try again.");
+            }
+          },
+          error: function () {
+            alert("An error occurred. Please try again.");
+          },
+        });
+      }
     });
   });
 });

@@ -40,6 +40,9 @@ if (isset($_SESSION["username"]) && $_SESSION['username'] == 'admin_cruciweb') {
         case 'delete_user':
             $controller = new AdminController();
             $controller->delete_user($_GET['username']);
+            $action = '';
+            $controller = new AdminController();
+            $controller->index();
             break;
         default:
             require ($_SERVER['DOCUMENT_ROOT'].'/app/Views/404.php');
@@ -62,6 +65,7 @@ switch ($action) {
     case 'signup':
         $controller = new UserController();
         if (isset($_POST['username'])) {
+            
             $controller->signUp();
         } else {
             $controller->afficher_signup();

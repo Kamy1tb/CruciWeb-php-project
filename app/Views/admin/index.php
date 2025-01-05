@@ -6,6 +6,7 @@
     <title>Panneau d'administration</title>
     <link rel="stylesheet" href="/public/css/admin.css">
     <link rel="stylesheet" href="/public/css/global.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <nav>
@@ -47,7 +48,7 @@
                     <td><?= htmlspecialchars($user['full_name']) ?></td>
                     <td><?= htmlspecialchars($user['mail']) ?></td>
                     <td>
-                        <a href="/admin/deleteUser?id=<?= urlencode($user['id']) ?>" onclick="return confirm('Are you sure?')">Delete</a>
+                        <a href="/index.php?action=delete_user&username=<?= urlencode($user['username']) ?>">Delete</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -96,6 +97,6 @@
     </div>
     
 
-    <script src="/public/js/script.js"></script>
+    <script src="/public/js/admin.js"></script>
 </body>
 </html>
