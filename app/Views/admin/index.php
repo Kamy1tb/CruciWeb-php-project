@@ -83,7 +83,7 @@
                                 <td><?= htmlspecialchars($grid['date']) ?></td>
                                 <td><?= htmlspecialchars($grid['description']) ?></td>
                                 <td>
-                                    <a href="/admin/deleteGrid?id=<?= urlencode($grid['id']) ?>" onclick="return confirm('Are you sure?')">Delete</a>
+                                    <a href="/index.php?action=delete_grid&gridId=<?= urlencode($grid['id_grille']) ?>">Delete</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

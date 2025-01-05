@@ -21,4 +21,7 @@ class AdminController
     public function delete_user($id_user){
         $this->AdminModel->deleteUser($id_user);
     }
+    public function delete_grid($id_grid){
+        $this->AdminModel->deleteGrid($id_grid);
+    }
 }

@@ -21,6 +21,11 @@ class AdminModel {
         $stmt->execute(['username' => $username]);
         return "Utilisateur supprimé avec succès.";
     }
+    public function deleteGrid($gridId) {
+        $stmt = $this->db_admin->prepare("DELETE FROM grille WHERE id_grille = :id_grille");
+        $stmt->execute(['id_grille' => $gridId]);
+        return 'Grille supprimée avec succès.';
+    }
 }
 
 ?>

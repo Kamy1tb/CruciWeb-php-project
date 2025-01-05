@@ -44,6 +44,13 @@ if (isset($_SESSION["username"]) && $_SESSION['username'] == 'admin_cruciweb') {
             $controller = new AdminController();
             $controller->index();
             break;
+        case 'delete_grid':
+            $controller = new AdminController();
+            $controller->delete_grid($_GET['gridId']);
+            $action = '';
+            $controller = new AdminController();
+            $controller->index();
+            break;
         default:
             require ($_SERVER['DOCUMENT_ROOT'].'/app/Views/404.php');
             break;
@@ -65,7 +72,7 @@ switch ($action) {
     case 'signup':
         $controller = new UserController();
         if (isset($_POST['username'])) {
-            
+
             $controller->signUp();
         } else {
             $controller->afficher_signup();
