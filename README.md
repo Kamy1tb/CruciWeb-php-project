@@ -1,12 +1,15 @@
-#CruciWeb
-##Description
-CruciWeb est une plateforme en ligne pour créer, résoudre et partager des mots croisés. Elle est développée avec une architecture MVC en utilisant PHP pour le backend, MySQL pour la base de données, et HTML, CSS, et JavaScript pour le frontend.
-##Fonctionnalités
-Création de grilles de mots croisés par les utilisateurs.
-Résolution en ligne avec sauvegarde de l'état de la grille.
-Partage et notation des grilles par la communauté.
-##Déploiement
-Veuillez consulter la notice de déploiement jointe pour les détails spécifiques sur la configuration et l'optimisation du serveur pour CruciWeb.
-##Rapport de Conception
-Le rapport de conception  fournit une vue d'ensemble de l'architecture MVC, des choix technologiques, des modèles de données et des interactions utilisateur pour CruciWeb.
+# CruciWeb
 
+## Description
+CruciWeb est une plateforme en ligne pour créer, résoudre et partager des mots croisés. Elle utilise une architecture MVC avec PHP pour le backend, MySQL pour la gestion de la base de données, et HTML, CSS, ainsi que JavaScript pour le frontend.
+
+## Fonctionnalités
+- **Création de grilles** : Permet aux utilisateurs de créer leurs propres grilles de mots croisés.
+- **Résolution en ligne** : Les utilisateurs peuvent résoudre des mots croisés directement sur la plateforme et leur progression est sauvegardée.
+- **Partage et notation** : Les utilisateurs peuvent partager leurs grilles avec la communauté et les noter.
+
+## Déploiement
+Pour déployer CruciWeb sur votre serveur, veuillez consulter la notice de déploiement jointe qui détaille la configuration spécifique du serveur et les optimisations nécessaires pour faire fonctionner CruciWeb efficacement.
+
+## Rapport de Conception
+Le rapport de conception détaille l'architecture MVC utilisée, les choix technologiques, les modèles de données et les interactions utilisateurs spécifiques à CruciWeb. Cette documentation est essentielle pour comprendre la structure et le fonctionnement interne de la plateforme.
