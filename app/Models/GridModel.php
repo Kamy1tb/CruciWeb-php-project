@@ -33,19 +33,16 @@ public function getAllGrids() {
 public function saveGrid($id_grille,$id_user,$solution) {
     $solution_json = json_encode($solution);
     try {
-        // Vérifiez les valeurs avant l'exécution
-        print_r($id_grille);  // Affichez la valeur de $id_grille
-        print_r($id_user);    // Affichez la valeur de $id_user
-        print_r($solution_json);  // Affichez la valeur de $solution_json
+        print_r($id_grille);
+        print_r($id_user); 
+        print_r($solution_json); 
         
-        // Préparez la requête SQL avec les paramètres liés
         $stmt = $this->db->prepare("
             INSERT INTO sauvegarde (id_grille, id_user, solution) 
             VALUES (:id_grille, :id_user, :solution_json) 
             ON DUPLICATE KEY UPDATE solution = :solution_json;
         ");
     
-        // Exécution avec les valeurs liées
         $stmt->execute([
             ':id_grille' => $id_grille, 
             ':id_user' => $id_user, 
@@ -74,8 +71,7 @@ public function getUserGridProgress($username, $gridId) {
     $stmt = $this->db->prepare($sql);
     $stmt->execute(['username' => $username, 'grid_id' => $gridId]);
 
-    // Directly return the result as an array like in getAllGrids
-    return $stmt->fetch(\PDO::FETCH_ASSOC); // This will return an associative array with the 'solution' key
+    return $stmt->fetch(\PDO::FETCH_ASSOC); 
 }
 
 

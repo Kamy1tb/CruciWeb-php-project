@@ -2,33 +2,29 @@ document
   .getElementById("signup-form")
   .addEventListener("submit", function (event) {
     event.preventDefault();
-    const errorDiv = document.getElementById('error-message');
-    errorDiv.textContent = '';
+    const errorDiv = document.getElementById("error-message");
+    errorDiv.textContent = "";
     const formData = {
-      action: 'signup', // Ajouter l'action ici
-      username: $('#username').val(),
-      fullname: $('#fullname').val(),
-      password: $('#password').val(),
-      email: $('#email').val(),
+      action: "signup",
+      username: $("#username").val(),
+      fullname: $("#fullname").val(),
+      password: $("#password").val(),
+      email: $("#email").val(),
     };
 
-    console.log(formData);
     $.ajax({
-      url: 'index.php?action=signup',
-      method: 'POST',
-      data: formData, // L'objet FormData contenant les données du formulaire
-    
+      url: "index.php?action=signup",
+      method: "POST",
+      data: formData,
+
       success: function (response) {
-          console.log(response);
-          window.location.href = 'index.php';
-          return response;
+        console.log(response);
+        window.location.href = "index.php";
+        return response;
       },
       error: function (xhr, status, error) {
-        console.log("Status:", status);
-        console.log("Requête renvoyée :", xhr.responseText);
-        const errorDiv = document.getElementById('error-message');
-        errorDiv.textContent = 'Cet utilisateur existe déjà';
-      }
-  });
-    
+        const errorDiv = document.getElementById("error-message");
+        errorDiv.textContent = "Cet utilisateur existe déjà";
+      },
+    });
   });

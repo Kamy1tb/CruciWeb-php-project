@@ -12,10 +12,8 @@
   </div>
   <div class="nav-right" >
   <?php
-  // Vérifier si 'username' est dans $_POST et non vide
   if (isset($_SESSION['username'])) {
-      // Récupérer et afficher le nom d'utilisateur
-      $username = htmlspecialchars($_SESSION['username']); // Sécuriser l'entrée
+      $username = htmlspecialchars($_SESSION['username']); 
       echo '<div class="logged-in">
               <span> Bienvenue, '.$username.'!</span>
               <a href="index.php?action=logout" class="logout-button">
@@ -24,7 +22,6 @@
               </a>
             </div>';
   } else {
-      // Si 'username' n'existe pas, afficher le lien de connexion
       echo '<a href="index.php?action=login" class="login-button">Se connecter</a>';
   }
   ?>

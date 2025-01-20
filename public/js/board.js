@@ -17,27 +17,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const verticalGroups = {};
 
   Object.keys(clues).forEach((key) => {
-    const [prefix] = key.split("."); // Extract the part before the '.'
+    const [prefix] = key.split(".");
     const clueValue = clues[key];
 
-    // Determine whether the key is horizontal or vertical
     const isVertical = /[a-zA-Z]/.test(prefix);
 
-    // Group the clues based on the prefix
     const group = isVertical ? verticalGroups : horizontalGroups;
 
     if (!group[prefix]) {
-      // If the group for this prefix doesn't exist, create it
       const groupContainer = document.createElement("div");
       groupContainer.classList.add("clue-group");
       group[prefix] = groupContainer;
 
-      // Add the prefix at the start
       const prefixLabel = document.createElement("span");
       prefixLabel.textContent = `${prefix}. `;
       groupContainer.appendChild(prefixLabel);
 
-      // Append the group container to the appropriate parent container
       if (isVertical) {
         verticalCluesContainer.appendChild(groupContainer);
       } else {
@@ -45,12 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // Add the clue to the group
     const groupContainer = group[prefix];
 
-    // Check if there are already clues in the group
     if (groupContainer.querySelectorAll("span").length > 1) {
-      // Add a separator if the group already has clues
       const separator = document.createTextNode(" / ");
       groupContainer.appendChild(separator);
     }
@@ -60,12 +52,10 @@ document.addEventListener("DOMContentLoaded", () => {
     groupContainer.appendChild(clueElement);
   });
 
-  // Variables for the number of rows and columns
   const height = grid.height;
   const width = grid.width;
-  gridContainer.innerHTML = ""; // Clear the grid container
+  gridContainer.innerHTML = "";
 
-  // Add column headers
   const headerRow = document.createElement("div");
   headerRow.classList.add("grid-row");
   for (let col = 0; col < parseInt(width, 10) + 1; col++) {
@@ -80,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const row = document.createElement("div");
     row.classList.add("grid-row");
 
-    // Add row header
     const headerCell = document.createElement("div");
     headerCell.classList.add("header-cell");
     headerCell.textContent = i + 1;
@@ -97,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
         cell.classList.add("highlighted");
       } else {
         cell.contentEditable = true;
-        // Add event listener to enforce single-character input, alphabetic characters only, and move to the next cell
         cell.addEventListener("input", (e) => {
           let inputChar = e.data ? e.data.toUpperCase() : "";
           if (/^[A-Z]$/.test(inputChar) || inputChar === "") {
@@ -105,7 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
           } else {
             cell.textContent = "";
           }
-          // Move to the next available cell
           if (e.inputType === "insertText" && /^[A-Z]$/.test(inputChar)) {
             let nextCell;
             if (isHorizontal) {
@@ -114,33 +101,31 @@ document.addEventListener("DOMContentLoaded", () => {
                 nextCell = nextCell.nextElementSibling;
               }
             } else {
-              const currentRow = cell.parentElement; // Get the parent grid-row of the current cell
+              const currentRow = cell.parentElement;
               const currentRowIndex = Array.from(
                 gridContainer.children
-              ).indexOf(currentRow); // Get the index of the current row
+              ).indexOf(currentRow);
               const currentCellIndex = Array.from(currentRow.children).indexOf(
                 cell
-              ); // Get the index of the current cell in the row
+              );
 
-              // Get the next row
-              const nextRow = gridContainer.children[currentRowIndex + 1]; // Move to the next row (y + 1)
+              const nextRow = gridContainer.children[currentRowIndex + 1];
               if (nextRow) {
-                nextCell = nextRow.children[currentCellIndex]; // Get the cell in the same column (x)
+                nextCell = nextRow.children[currentCellIndex];
 
-                // Skip highlighted cells
                 while (nextCell && nextCell.classList.contains("highlighted")) {
                   const nextRowIndex =
                     Array.from(gridContainer.children).indexOf(nextRow) + 1;
-                  const furtherNextRow = gridContainer.children[nextRowIndex]; // Move to the next row
+                  const furtherNextRow = gridContainer.children[nextRowIndex];
                   nextCell = furtherNextRow
                     ? furtherNextRow.children[currentCellIndex]
-                    : null; // Get the corresponding cell
+                    : null;
                 }
               }
             }
 
             if (!nextCell || nextCell.classList.contains("header-cell")) {
-              nextCell = null; // Stop at the last character of the word
+              nextCell = null;
             }
             if (nextCell) {
               nextCell.focus();
@@ -149,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         cell.addEventListener("focus", () => {
-          currentFocusedCell = cell; // Store the currently focused cell
+          currentFocusedCell = cell;
           clearHighlights();
           highlightCurrentLineOrColumn(currentFocusedCell);
         });
@@ -160,7 +145,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (progress) {
-    // Fill horizontal progress
     for (let i = 1; i <= grid.height; i++) {
       let clueCount = 0;
       let j = 1;
@@ -198,7 +182,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // Fill vertical progress
     for (let j = 1; j <= grid.width; j++) {
       let clueCount = 0;
       let i = 1;
@@ -244,11 +227,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function highlightCurrentLineOrColumn(cell) {
     if (isHorizontal) {
-      // Highlight the entire row
-      const row = cell.parentElement; // Get the specific grid-row
+      const row = cell.parentElement;
       if (row) {
         Array.from(row.children).forEach((cell) => {
-          // Corrected here to loop through children
           if (
             !cell.classList.contains("highlighted") &&
             !cell.classList.contains("header-cell")
@@ -258,13 +239,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     } else {
-      const row = cell.parentElement; // Get the grid-row that the cell is in
-      const colIndex = Array.from(row.children).indexOf(cell); // Get the column index of the cell within the row
-      // Highlight the entire column
+      const row = cell.parentElement;
+      const colIndex = Array.from(row.children).indexOf(cell);
       for (let row = 0; row < gridContainer.children.length; row++) {
-        // Start from index 0 if it's the first row
-        const gridRow = gridContainer.children[row]; // Get each grid-row
-        const cell = gridRow.children[colIndex]; // Get the specific cell in the column
+        const gridRow = gridContainer.children[row];
+        const cell = gridRow.children[colIndex];
         if (
           cell &&
           !cell.classList.contains("highlighted") &&
@@ -316,7 +295,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const rows = gridContainer.querySelectorAll(".grid-row");
       let allCellsFilled = true;
 
-      // Check if all cells are filled
       rows.forEach((row) => {
         const cells = row.querySelectorAll(".grid-cell");
         cells.forEach((cell) => {
@@ -336,7 +314,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const solutions = {};
 
-      // Generate horizontal solutions
       for (let i = 1; i <= grid.height; i++) {
         let clueCount = 0;
         let j = 1;
@@ -368,7 +345,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      // Generate vertical solutions
       for (let j = 1; j <= grid.width; j++) {
         let clueCount = 0;
         let i = 1;
@@ -401,9 +377,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const hashSolution = (solution) => {
-        // Convert the solution to SHA-256 hash
         const hash = CryptoJS.SHA256(solution);
-        // Convert the hash to a hex string
         return hash.toString(CryptoJS.enc.Hex);
       };
 
@@ -418,20 +392,17 @@ document.addEventListener("DOMContentLoaded", () => {
       (async () => {
         const hashedSolutions = hashSolutions(solutions);
 
-        // Function to compare two objects
         const areObjectsEqual = (obj1, obj2) => {
           const keys1 = Object.keys(obj1);
           const keys2 = Object.keys(obj2);
 
-          // Check if they have the same number of keys
           if (keys1.length !== keys2.length) return false;
 
-          // Check if all values are equal
           return keys1.every((key) => obj1[key] === obj2[key]);
         };
 
         if (areObjectsEqual(hashedSolutions, answers)) {
-          modal.style.display = "block"; // Show the modal
+          modal.style.display = "block";
         } else {
           alert("La solution est incorrecte.");
         }
@@ -451,7 +422,6 @@ document.getElementById("save-solution").addEventListener("click", function () {
 
   const solutions = {};
 
-  // Generate horizontal solutions
   for (let i = 1; i <= grid.height; i++) {
     let clueCount = 0;
     let j = 1;
@@ -471,7 +441,7 @@ document.getElementById("save-solution").addEventListener("click", function () {
             j + wordLength + 1
           })`
         );
-        word += cell.textContent.trim() || " "; // Add a blank for empty cells
+        word += cell.textContent.trim() || " ";
         wordLength++;
       }
       if (wordLength > 1) {
@@ -483,7 +453,6 @@ document.getElementById("save-solution").addEventListener("click", function () {
     }
   }
 
-  // Generate vertical solutions
   for (let j = 1; j <= grid.width; j++) {
     let clueCount = 0;
     let i = 1;
@@ -503,7 +472,7 @@ document.getElementById("save-solution").addEventListener("click", function () {
             i + wordLength + 1
           }) .grid-cell:nth-child(${j + 1})`
         );
-        word += cell.textContent.trim() || " "; // Add a blank for empty cells
+        word += cell.textContent.trim() || " ";
         wordLength++;
       }
       if (wordLength > 1) {

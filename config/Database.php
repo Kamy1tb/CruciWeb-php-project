@@ -7,7 +7,7 @@ use PDO;
 use PDOException;
 
 // Charger le fichier .env
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../'); // Chemin où se trouve le fichier .env
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../'); 
 $dotenv->load();
 class Database {
     private $host;

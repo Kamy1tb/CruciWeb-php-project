@@ -1,7 +1,7 @@
 body {
   font-family: "DM Sans", sans-serif;
   background-color: #f0f0f0;
-  min-height: 100vh; /* Minimum height of 100vh */
+  min-height: 100vh;
   margin: 0;
   font-weight: 800;
 }
@@ -12,8 +12,8 @@ body {
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 100%; /* At least half the screen */
-  max-width: 1200px; /* Optional: limit the maximum width */
+  width: 100%;
+  max-width: 1200px;
   text-align: center;
   margin-top: 20px;
 }
@@ -108,7 +108,7 @@ body {
 }
 
 #controls button.active {
-  background-color: #91b3fa; /* Blue color for the active button */
+  background-color: #91b3fa;
 }
 
 #controls button:hover {
@@ -215,24 +215,24 @@ body {
 }
 
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none;
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
   background-color: #fff;
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 80%;
   max-width: 600px;
   border-radius: 10px;
   text-align: center;
